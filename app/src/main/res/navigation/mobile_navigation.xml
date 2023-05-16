@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_menu">
+    app:startDestination="@+id/navigation_dashboard">
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2Fragment"
+        android:label="@string/title_dashboard" />
 
     <fragment
         android:id="@+id/navigation_menu"
         android:name="id.fishku.fisherseller.presentation.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_product"
         tools:layout="@layout/fragment_home" />
 
     <fragment

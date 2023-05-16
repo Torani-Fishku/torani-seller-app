@@ -4,6 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_order">Pesanan</string>
     <string name="title_account">Akun</string>
+    <string name="title_product">Produk</string>
     <string name="logo">Logo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="back">Back</string>
@@ -80,7 +81,7 @@
     <string name="sure_logout_sub">Anda akan logout dari akun ini</string>
 
     <string name="img_empty">Foto tidak boleh kosong</string>
-    <string name="load_image">Memuat Foto...</string>
+    <string name="load_image">Memuat Foto…</string>
     <string name="no_sell">Tidak ada jualan</string>
     <string name="kirim_pesan">Kirim pesan</string>
     <string name="pesan">Pesan</string>
@@ -176,5 +177,6 @@
     <string name="title_activity_address">AddressActivity</string>
     <string name="delivery_location">Lokasi pengiriman</string>
     <string name="tpi_address">Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</string>
+
 
 </resources>

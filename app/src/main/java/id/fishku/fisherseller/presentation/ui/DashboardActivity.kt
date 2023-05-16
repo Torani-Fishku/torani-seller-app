@@ -31,6 +31,7 @@ class DashboardActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_dashboard)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
+                R.id.navigation_dashboard,
                 R.id.navigation_menu,
                 R.id.navigation_order,
                 R.id.navigation_chat,
