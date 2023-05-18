@@ -146,7 +146,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_price"
-                android:inputType="textCapSentences"
+                android:inputType="number"
                 style="@style/TextInput" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -173,7 +173,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_stock"
-                android:inputType="textCapSentences"
+                android:inputType="number"
                 style="@style/TextInput" />
         </com.google.android.material.textfield.TextInputLayout>
 

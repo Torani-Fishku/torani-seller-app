@@ -9,7 +9,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -84,6 +87,25 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.hide()
         setContentView(binding.root)
 
+        val nameProduct = "Nama Barang*"
+        val spannableName = SpannableString(nameProduct)
+        spannableName.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)), 0, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableName.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)), 11, 12, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.textView2.text = spannableName
+
+        val price = "Harga*"
+        val spannablePrice = SpannableString(price)
+        spannablePrice.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannablePrice.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)), 5, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.textView3.text = spannablePrice
+
+        val stock = "Stok (Kg)*"
+        val spannableStock = SpannableString(stock)
+        spannableStock.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)), 0, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStock.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)), 9, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.textView4.text = spannableStock
+
+
         if (!allPermissionGranted()) {
             ActivityCompat.requestPermissions(
                 this,
@@ -138,7 +160,6 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         if (myFile != null) {
             observableUploadViewModel(myFile!!)
         } else{
-            sendRequest()
             binding.ivEmpty.visibility = View.VISIBLE
         }
     }
