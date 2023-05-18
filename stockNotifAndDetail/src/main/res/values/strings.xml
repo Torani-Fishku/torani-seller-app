@@ -1,0 +1,86 @@
+<resources>
+    <string name="title_notification">"Perhatian : Stok %$s Anda hampir habis!"</string>
+    <string name="desc_notification">Stok %1$s anda tersisa %2$d kg. Segera lakukan penambahan persediaan</string>
+    <string name="backbutton">BackButton</string>
+    <string name="notification">Notification</string>
+
+    <string-array name="name_fish">
+        <item>Bandeng</item>
+        <item>Kakap</item>
+        <item>Tonari</item>
+        <item>Lele</item>
+        <item>Tuna</item>
+        <item>Salmon</item>
+        <item>Tongkol</item>
+        <item>Gurame</item>
+    </string-array>
+
+
+    <integer-array name="stock_fish">
+        <item>5</item>
+        <item>2</item>
+        <item>30</item>
+        <item>30</item>
+        <item>30</item>
+        <item>30</item>
+        <item>50</item>
+        <item>90</item>
+    </integer-array>
+
+    <integer-array name="price">
+        <item>70000</item>
+        <item>90000</item>
+        <item>60000</item>
+        <item>50000</item>
+        <item>90000</item>
+        <item>100000</item>
+        <item>40000</item>
+        <item>75000</item>
+    </integer-array>
+
+    <string-array name="decs">
+        <item> Dapatkan ikan bandeng segar berkualitas terbaik, ditangkap di perairan bersih, dan diproses dengan hati-hati untuk menjaga kesegaran dan kelezatannya.</item>
+        <item>Nikmati kelezatan ikan kakap segar yang berkualitas prima, langsung dari perairan yang bersih dan diolah secara hati-hati untuk menjaga kesegarannya.</item>
+        <item> Nikmati kelezatan ikan torani segar yang berkualitas tinggi, dengan daging yang lezat dan kaya rasa</item>
+        <item> Nikmati kelezatan ikan lele segar yang berkualitas tinggi, dengan daging yang lezat dan kaya rasa</item>
+        <item> Nikmati kelezatan ikan tuna segar yang berkualitas tinggi, dengan daging yang lezat dan kaya rasa</item>
+        <item> Nikmati kelezatan ikan salmon segar yang berkualitas tinggi, dengan daging yang lezat dan kaya rasa</item>
+        <item> Nikmati kelezatan ikan tongkol segar yang berkualitas tinggi, dengan daging yang lezat dan kaya rasa</item>
+        <item> Nikmati kelezatan ikan gurame segar yang berkualitas tinggi, dengan daging yang lezat dan kaya rasa</item>
+    </string-array>
+
+    <string-array name="seller">
+        <item>Muslikin</item>
+        <item>Virgoun</item>
+        <item>Muslikin</item>
+        <item>Muslikin</item>
+        <item>Muslikin</item>
+        <item>Muslikin</item>
+        <item>Muslikin</item>
+        <item>Muslikin</item>
+    </string-array>
+
+    <string-array name="tpi_loc">
+        <item>TPI Jepara</item>
+        <item>TPI Jakarta Pusat</item>
+        <item>TPI Jepara</item>
+        <item>TPI Jepara</item>
+        <item>TPI Jepara</item>
+        <item>TPI Jepara</item>
+        <item>TPI Jepara</item>
+        <item>TPI Jepara</item>
+    </string-array>
+
+    <string-array name="location">
+        <item>Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</item>
+        <item>Jl. Sudirman No 12, Jakarta Pusat</item>
+        <item>Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</item>
+        <item>Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</item>
+        <item>Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</item>
+        <item>Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</item>
+        <item>Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</item>
+        <item>Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</item>
+    </string-array>
+
+
+</resources>

@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/notification" />
             <option value="$PROJECT_DIR$/otp" />
             <option value="$PROJECT_DIR$/seller" />
+            <option value="$PROJECT_DIR$/stockNotifAndDetail" />
           </set>
         </option>
       </GradleProjectSettings>
