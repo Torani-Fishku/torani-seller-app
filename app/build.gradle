@@ -53,7 +53,7 @@ dependencies {
     implementation project(":core")
     implementation project(":otp")
     implementation project(":newdashboard")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0"
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
@@ -126,5 +126,6 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:2.5.3"
     implementation "com.google.accompanist:accompanist-themeadapter-material3:0.31.2-alpha"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "io.coil-kt:coil-compose:2.3.0"
 
 }
