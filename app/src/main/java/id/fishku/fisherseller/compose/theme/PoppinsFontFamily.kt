@@ -1,4 +1,4 @@
-package id.fishku.fisherseller.presentation.ui.dashboardv2.theme
+package id.fishku.fisherseller.compose.theme
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily

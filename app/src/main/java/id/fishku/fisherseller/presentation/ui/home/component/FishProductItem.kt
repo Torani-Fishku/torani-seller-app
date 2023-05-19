@@ -23,7 +23,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import id.fishku.fisherseller.R
-import id.fishku.fisherseller.presentation.ui.dashboardv2.theme.fonts
+import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fishersellercore.model.MenuModel
 import id.fishku.fishersellercore.util.convertCurrencyFormat
 import kotlinx.coroutines.launch

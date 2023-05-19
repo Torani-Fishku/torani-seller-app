@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import id.fishku.fisherseller.presentation.ui.dashboardv2.components.*
 import androidx.compose.ui.text.TextStyle
-import id.fishku.fisherseller.presentation.ui.dashboardv2.theme.fonts
+import id.fishku.fisherseller.compose.theme.fonts
 
 /**
  * DashboardV2 Composable Screen

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import id.fishku.fisherseller.R
-import id.fishku.fisherseller.presentation.ui.dashboardv2.theme.fonts
+import id.fishku.fisherseller.compose.theme.fonts
 
 /**
  * ProductData Composable Component

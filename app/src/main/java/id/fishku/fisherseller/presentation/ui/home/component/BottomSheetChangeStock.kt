@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import id.fishku.fisherseller.R
-import id.fishku.fisherseller.presentation.ui.dashboardv2.theme.fonts
+import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fishersellercore.model.MenuModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
