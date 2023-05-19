@@ -60,9 +60,9 @@ fun DashboardV2Screen() {
                 WeatherAndTideCard()
                 Spacer(modifier = Modifier.height(24.dp))
                 ProductData()
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 SalesAnalysis()
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 StockAnalysis()
             }
         }

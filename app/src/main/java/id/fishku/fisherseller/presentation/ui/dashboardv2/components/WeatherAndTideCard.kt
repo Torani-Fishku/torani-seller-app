@@ -112,6 +112,7 @@ fun WeatherAndTideCard() {
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(32.dp))
                 Image(
                     contentScale = ContentScale.FillWidth,
                     painter = painterResource(id = R.drawable.img_wave),
