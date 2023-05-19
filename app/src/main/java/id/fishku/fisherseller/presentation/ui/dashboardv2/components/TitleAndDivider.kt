@@ -31,8 +31,9 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
         Text(
             title,
             style = TextStyle(
-                fontFamily = fonts, fontSize = 12.sp,
-                fontWeight = FontWeight.SemiBold,
+                fontFamily = fonts,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.blue),
             )
         )
