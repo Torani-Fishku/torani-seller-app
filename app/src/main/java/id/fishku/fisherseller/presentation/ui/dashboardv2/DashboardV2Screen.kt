@@ -51,20 +51,16 @@ fun DashboardV2Screen() {
         })
     }, content = { innerPadding ->
         Column(
-            modifier = Modifier
+            modifier = Modifier.verticalScroll(rememberScrollState()).padding(innerPadding)
+                .padding(24.dp)
         ) {
-            Column(
-                modifier = Modifier.verticalScroll(rememberScrollState()).padding(innerPadding)
-                    .padding(24.dp)
-            ) {
-                WeatherAndTideCard()
-                Spacer(modifier = Modifier.height(24.dp))
-                ProductData()
-                Spacer(modifier = Modifier.height(16.dp))
-                SalesAnalysis()
-                Spacer(modifier = Modifier.height(16.dp))
-                StockAnalysis()
-            }
+            WeatherAndTideCard()
+            Spacer(modifier = Modifier.height(24.dp))
+            ProductData()
+            Spacer(modifier = Modifier.height(16.dp))
+            SalesAnalysis()
+            Spacer(modifier = Modifier.height(16.dp))
+            StockAnalysis()
         }
     })
 }
