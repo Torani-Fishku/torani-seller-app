@@ -26,16 +26,21 @@
         android:theme="@style/Theme.FisherSeller"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.ui.detail.FishDetailActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${GCP_API_KEY}" />
-
+            android:value="AIzaSyBwnPuKVmuXBfTRXSh0t3Rw9cKUYVs5nHM" />
+        <activity
+            android:name=".presentation.ui.notification.StockNotifActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.order.detail.AddressActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_activity_address" />
+            android:label="@string/title_activity_address"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".services.FirebaseService"

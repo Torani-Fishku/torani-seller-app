@@ -89,20 +89,50 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
 
         val nameProduct = "Nama Barang*"
         val spannableName = SpannableString(nameProduct)
-        spannableName.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)), 0, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableName.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)), 11, 12, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableName.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)),
+            0,
+            10,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableName.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)),
+            11,
+            12,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         binding.textView2.text = spannableName
 
         val price = "Harga*"
         val spannablePrice = SpannableString(price)
-        spannablePrice.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannablePrice.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)), 5, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannablePrice.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)),
+            0,
+            4,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannablePrice.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)),
+            5,
+            6,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         binding.textView3.text = spannablePrice
 
         val stock = "Stok (Kg)*"
         val spannableStock = SpannableString(stock)
-        spannableStock.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)), 0, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableStock.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)), 9, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableStock.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)),
+            0,
+            8,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableStock.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)),
+            9,
+            10,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         binding.textView4.text = spannableStock
 
 
@@ -130,14 +160,14 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             intent.getParcelableExtra(Constants.SEND_MENU_TO_EDIT)
         }
-        if (editMenu != null){
+        if (editMenu != null) {
             binding.tvHeader.text = resources.getString(R.string.edit_menu)
             binding.tvEdit.visibility = View.GONE
         }
         binding.edtName.setText(editMenu?.name ?: "")
         binding.edtPrice.setText(editMenu?.price ?: "")
         binding.edtStock.setText(editMenu?.weight?.toString() ?: "")
-        editMenu?.photo_url?.let { binding.itemImg.setImage(Constants.URL_IMAGE+it) }
+        editMenu?.photo_url?.let { binding.itemImg.setImage(Constants.URL_IMAGE + it) }
     }
 
     private fun sendRequest() {
@@ -151,15 +181,20 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         if (editMenu?.id_fish != null)
             observableEditViewModel(editMenu!!.id_fish, request)
         else {
-            observableViewModel(request)
+            if (myFile != null) {
+                observableViewModel(request)
+            } else {
+                binding.ivEmpty.visibility = View.VISIBLE
+            }
         }
     }
 
-    private fun uploadImage(){
+    private fun uploadImage() {
 
         if (myFile != null) {
             observableUploadViewModel(myFile!!)
-        } else{
+        } else {
+            sendRequest()
             binding.ivEmpty.visibility = View.VISIBLE
         }
     }

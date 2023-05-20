@@ -176,5 +176,8 @@
     <string name="title_activity_address">AddressActivity</string>
     <string name="delivery_location">Lokasi pengiriman</string>
     <string name="tpi_address">Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</string>
+    <string name="backbutton">back</string>
+    <string name="notification">NOTIFICATION</string>
+    <string name="no_notifikasi">Tidak ada notifikasi</string>
 
 </resources>
