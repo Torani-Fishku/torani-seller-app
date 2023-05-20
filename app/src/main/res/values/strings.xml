@@ -182,4 +182,6 @@
     <string name="tpi_address">Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</string>
 
     <string name="stock_convert">Stok: %1$s kg</string>
+    <string name="title_activity__analysis_weather">WeatherAnalysisActivity</string>
+    <string name="title_activity__analysis_selling">SellingnalysisActivity</string>
 </resources>

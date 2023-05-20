@@ -1,5 +1,6 @@
 package id.fishku.fisherseller.presentation.ui.dashboardv2.components
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -24,10 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
+import id.fishku.fisherseller.presentation.ui.analysis.weather.WeatherAnalysisActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WeatherAndTideCard() {
+    val context = LocalContext.current
     val iconSize = 120.dp
     val offsetHorizontalInPx = LocalDensity.current.run { (iconSize / 7).roundToPx() }
     val offsetVerticallInPx = LocalDensity.current.run { (iconSize * 3 / 8).roundToPx() }
@@ -173,9 +177,12 @@ fun WeatherAndTideCard() {
                         }
 
                     }
-                    Box(modifier = Modifier.fillMaxWidth()){
+                    Box(modifier = Modifier.fillMaxWidth()) {
                         TextButton(
-                            onClick = { }, modifier = Modifier.align(Alignment.CenterEnd)
+                            onClick = {
+                                val intent = Intent(context, WeatherAnalysisActivity::class.java)
+                                context.startActivity(intent)
+                            }, modifier = Modifier.align(Alignment.CenterEnd)
                         ) {
                             Text(
                                 text = "Lihat Detail",

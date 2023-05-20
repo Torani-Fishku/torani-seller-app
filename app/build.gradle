@@ -20,6 +20,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -47,6 +50,11 @@ android {
     }
 
     namespace 'id.fishku.fisherseller'
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
@@ -127,5 +135,11 @@ dependencies {
     implementation "com.google.accompanist:accompanist-themeadapter-material3:0.31.2-alpha"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
     implementation "io.coil-kt:coil-compose:2.3.0"
+
+    // Jetpack Compose Graph
+    implementation "com.patrykandpatrick.vico:core:1.6.5"
+    implementation "com.patrykandpatrick.vico:compose:1.6.5"
+    implementation "com.patrykandpatrick.vico:views:1.6.5"
+    implementation "com.patrykandpatrick.vico:compose-m3:1.6.5"
 
 }

@@ -1,10 +1,12 @@
 package id.fishku.fisherseller.presentation.ui.dashboardv2.components
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -12,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
-
+import id.fishku.fisherseller.presentation.ui.analysis.selling.SellingAnalysisActivity
 
 /**
  * SalesAnalysis Composable Component
@@ -21,7 +23,12 @@ import id.fishku.fisherseller.compose.theme.fonts
  */
 @Composable
 fun SalesAnalysis() {
-    TitleAndDivider("Analisis Penjualan", onClick = {})
+    val context = LocalContext.current
+
+    TitleAndDivider("Analisis Penjualan", onClick = {
+        val intent = Intent(context, SellingAnalysisActivity::class.java)
+        context.startActivity(intent)
+    })
 
     Spacer(modifier = Modifier.height(24.dp))
     Text(
