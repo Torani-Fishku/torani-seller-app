@@ -18,6 +18,8 @@ import id.fishku.fisherseller.R
 import id.fishku.fisherseller.databinding.FragmentHomeBinding
 import id.fishku.fisherseller.otp.core.Status
 import id.fishku.fisherseller.presentation.ui.add.AddFActivity
+import id.fishku.fisherseller.presentation.ui.detail.FishDetailActivity
+import id.fishku.fisherseller.presentation.ui.notification.StockNotifActivity
 import id.fishku.fisherseller.seller.services.SessionManager
 import id.fishku.fishersellercore.model.MenuModel
 import id.fishku.fishersellercore.util.Constants
@@ -81,6 +83,12 @@ class HomeFragment : Fragment() {
         binding.rvMenu.apply {
             adapter = menuAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        menuAdapter.setOnItemClickListener {
+            val intent = Intent(requireActivity(), FishDetailActivity::class.java)
+            intent.putExtra(Constants.SEND_MENU_TO_EDIT, it)
+            startActivity(intent)
         }
 
         menuAdapter.setOnItemClick {
@@ -157,6 +165,12 @@ class HomeFragment : Fragment() {
                         binding.tvNoData.isVisible = true
                     menuAdapter.submitList(res.data?.data)
                     _menuList = res.data?.data as List<MenuModel>
+
+                    binding.btnNotification.setOnClickListener {
+                        val intent = Intent(requireActivity(), StockNotifActivity::class.java)
+                        startActivity(intent)
+
+                    }
                 }
             }
         }

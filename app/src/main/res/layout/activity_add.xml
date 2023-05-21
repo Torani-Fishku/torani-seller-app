@@ -114,12 +114,15 @@
             android:layout_height="wrap_content"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/blue_500"
+            app:counterEnabled="true"
+            app:counterMaxLength="16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_name"
+                android:maxLength="16"
                 android:inputType="textCapSentences"
                 style="@style/TextInput" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -146,7 +149,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_price"
-                android:inputType="textCapSentences"
+                android:inputType="number"
                 style="@style/TextInput" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -173,7 +176,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_stock"
-                android:inputType="textCapSentences"
+                android:inputType="number"
                 style="@style/TextInput" />
         </com.google.android.material.textfield.TextInputLayout>
 

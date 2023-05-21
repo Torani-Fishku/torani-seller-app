@@ -19,3 +19,4 @@ Repository Fishku Seller for Android Development Team's
 - ViewBinding
 - Enkripsi SharedPreference
 - Obfuscation with Proguard
+

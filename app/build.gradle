@@ -84,6 +84,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'id.zelory:compressor:3.0.1'
+    implementation "io.coil-kt:coil:1.1.1"
 
     implementation 'com.github.bumptech.glide:glide:4.14.1'
     kapt 'com.github.bumptech.glide:compiler:4.14.1'
