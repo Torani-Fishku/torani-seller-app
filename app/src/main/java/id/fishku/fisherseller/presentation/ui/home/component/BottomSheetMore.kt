@@ -21,6 +21,7 @@ import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.presentation.ui.detail.FishDetailActivity
 import id.fishku.fishersellercore.model.MenuModel
+import id.fishku.fishersellercore.util.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -100,6 +101,7 @@ fun BottomSheetMore(
                 },
                 modifier = Modifier.clickable {
                     val intent = Intent(context, FishDetailActivity::class.java)
+                    intent.putExtra(Constants.SEND_MENU_TO_EDIT, fishProduct)
                     context.startActivity(intent)
                 }
             )
