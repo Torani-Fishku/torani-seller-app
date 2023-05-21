@@ -1,6 +1,6 @@
 package id.fishku.fisherseller.presentation.ui.home.component
 
-
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -12,12 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.material3.*
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
+import id.fishku.fisherseller.presentation.ui.detail.FishDetailActivity
 import id.fishku.fishersellercore.model.MenuModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -30,8 +32,9 @@ fun BottomSheetMore(
     fishProduct: MenuModel,
     funcEdit: ((MenuModel) -> Unit)?,
     funcDelete: ((MenuModel) -> Unit)?,
-    //TODO: Add function to see the detail preview page of product
 ) {
+    val context = LocalContext.current
+
     if (moreSheetState.isVisible) {
         ModalBottomSheet(
             sheetState = moreSheetState,
@@ -96,7 +99,8 @@ fun BottomSheetMore(
                     )
                 },
                 modifier = Modifier.clickable {
-                    //TODO: Call function to see the detail preview page of product
+                    val intent = Intent(context, FishDetailActivity::class.java)
+                    context.startActivity(intent)
                 }
             )
             ListItem(
