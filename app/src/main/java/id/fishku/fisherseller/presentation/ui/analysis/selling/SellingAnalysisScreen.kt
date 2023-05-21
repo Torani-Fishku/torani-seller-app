@@ -36,7 +36,7 @@ fun SellingAnalysisScreen() {
             navigationIcon = {
                 IconButton(onClick = {
                     val intent = Intent(context, DashboardActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     context.startActivity(intent)
 
                 }) {
@@ -44,6 +44,7 @@ fun SellingAnalysisScreen() {
                         Icons.Rounded.ChevronLeft,
                         contentDescription = "Back",
                         tint = colorResource(R.color.blue),
+                        modifier = Modifier.size(35.dp)
                     )
                 }
             },
