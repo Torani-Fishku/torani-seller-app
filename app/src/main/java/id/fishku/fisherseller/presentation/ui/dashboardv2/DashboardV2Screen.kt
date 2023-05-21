@@ -1,5 +1,6 @@
 package id.fishku.fisherseller.presentation.ui.dashboardv2
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -9,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +20,7 @@ import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import id.fishku.fisherseller.presentation.ui.dashboardv2.components.*
 import androidx.compose.ui.text.TextStyle
 import id.fishku.fisherseller.compose.theme.fonts
+import id.fishku.fisherseller.presentation.ui.notification.StockNotifActivity
 
 /**
  * DashboardV2 Composable Screen
@@ -27,6 +30,8 @@ import id.fishku.fisherseller.compose.theme.fonts
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardV2Screen() {
+    val context = LocalContext.current
+
     Scaffold(topBar = {
         CenterAlignedTopAppBar(title = {
             Text(
@@ -41,11 +46,15 @@ fun DashboardV2Screen() {
                 )
             )
         }, actions = {
-            IconButton(onClick = { /* doSomething() */ }) {
+            IconButton(onClick = {
+                val intent = Intent(context, StockNotifActivity::class.java)
+                context.startActivity(intent)
+            }) {
                 Icon(
                     imageVector = Icons.Outlined.Notifications,
                     contentDescription = "Notification",
                     tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(28.dp)
                 )
             }
         })
