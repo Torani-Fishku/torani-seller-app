@@ -65,7 +65,7 @@ fun FishProductItem(
                         .build(),
                     contentDescription = "Translated description of what the image contains",
                     placeholder = painterResource(R.drawable.img_product_placeholder),
-                    modifier = Modifier.clip(RoundedCornerShape(8.dp))
+                    modifier = Modifier.clip(RoundedCornerShape(8.dp)).defaultMinSize(90.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
