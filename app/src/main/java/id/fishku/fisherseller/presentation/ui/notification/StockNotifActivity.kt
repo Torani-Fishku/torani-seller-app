@@ -12,15 +12,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.databinding.ActivityStockNotifBinding
 import id.fishku.fisherseller.otp.core.Status
+import id.fishku.fisherseller.presentation.ui.detail.FishDetailActivity
 import id.fishku.fisherseller.presentation.ui.home.HomeFragment
 import id.fishku.fisherseller.presentation.ui.home.HomeViewModel
 import id.fishku.fisherseller.seller.services.SessionManager
 import id.fishku.fishersellercore.model.MenuModel
+import id.fishku.fishersellercore.util.Constants
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class StockNotifActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityStockNotifBinding
+    private lateinit var binding: ActivityStockNotifBinding
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,20 +31,10 @@ class StockNotifActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         binding.rvNotification.setHasFixedSize(true)
-
-
         binding.rvNotification.layoutManager = LinearLayoutManager(this)
         observableViewModel()
 
-//        adapter.setOnItemClickListener { fish ->
-//            Intent(this, FishDetailActivity::class.java).also {
-//                it.putExtra(FishDetailActivity.DETAIL, fish)
-//                startActivity(it)
-//            }
-//
-//        }
-
-        binding.btnBack.setOnClickListener{
+        binding.btnBack.setOnClickListener {
             finish()
         }
     }
@@ -66,6 +58,12 @@ class StockNotifActivity : AppCompatActivity() {
                     val adapter = NotificationAdapter()
                     binding.rvNotification.adapter = adapter
                     adapter.submitList(lessFish)
+
+                    adapter.setOnItemClickListener {
+                        val intent = Intent(this, FishDetailActivity::class.java)
+                        intent.putExtra(Constants.SEND_MENU_TO_EDIT, it)
+                        startActivity(intent)
+                    }
                 }
             }
         }
@@ -76,10 +74,6 @@ class StockNotifActivity : AppCompatActivity() {
             ""
         else
             ""
-    }
-
-    companion object{
-        const val MENU_MODEL = "menu_model"
     }
 
 }
