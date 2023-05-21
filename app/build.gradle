@@ -60,7 +60,6 @@ android {
 dependencies {
     implementation project(":core")
     implementation project(":otp")
-    implementation project(":newdashboard")
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0"
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

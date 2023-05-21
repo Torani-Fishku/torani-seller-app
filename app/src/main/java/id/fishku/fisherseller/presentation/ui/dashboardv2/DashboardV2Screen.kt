@@ -68,7 +68,7 @@ fun DashboardV2Screen() {
 
 @Preview(showBackground = true)
 @Composable
-fun NewDashboardScreenPreview() {
+fun DashboardV2ScreenPreview() {
     Mdc3Theme {
         DashboardV2Screen()
     }
