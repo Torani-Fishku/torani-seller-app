@@ -35,6 +35,7 @@ class MenuAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = getItem(position)
         if (currentItem != null) holder.bind(currentItem, listener, listenerDel)
+        holder.itemView.setOnClickListener { listenerClick?.invoke(getItem(position)) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -74,5 +75,10 @@ class MenuAdapter(private val context: Context) :
     private var listenerDel: ((MenuModel) -> Unit)? = null
     fun setOnDelClick(listener: (MenuModel) -> Unit) {
         this.listenerDel = listener
+    }
+
+    private var listenerClick : ((MenuModel) -> Unit)? = null
+    fun setOnItemClickListener(listener: (MenuModel) -> Unit){
+        this.listenerClick = listener
     }
 }
