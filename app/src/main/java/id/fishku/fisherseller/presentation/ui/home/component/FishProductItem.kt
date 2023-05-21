@@ -46,7 +46,6 @@ fun FishProductItem(
         photoUrl = id.fishku.fishersellercore.util.Constants.URL_IMAGE + fishProduct.photo_url
     }
 
-
     Card(
         modifier = Modifier.height(180.dp).fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
@@ -93,7 +92,7 @@ fun FishProductItem(
                     Text(
                         stringResource(
                             R.string.stock_convert,
-                            "10"
+                            fishProduct.stock ?: 0,
                         ),
                         style = TextStyle(
                             fontFamily = fonts,
@@ -178,7 +177,7 @@ fun FishProductItemPreview() {
         id_fish = "dummy",
         photo_url = "https://cdn.discordapp.com/attachments/888781658566848532/1108666128936484905/img_product_placeholder.png",
         name = "Ikan Tuna",
-        price = "Rp. 97.000/kg",
+        price = "97000",
         weight = 10,
         stock = 100,
     )
