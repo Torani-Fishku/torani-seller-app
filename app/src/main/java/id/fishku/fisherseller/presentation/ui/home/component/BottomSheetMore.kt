@@ -120,6 +120,9 @@ fun BottomSheetMore(
                 modifier = Modifier.clickable {
                     funcDelete?.let {
                         funcDelete(fishProduct)
+                        moreSheetScope.launch {
+                            moreSheetState.hide()
+                        }
                     }
                 }
             )
