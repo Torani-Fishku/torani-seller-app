@@ -192,10 +192,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun startToOTP(value: OtpArgs) {
         if (value.user != null) {
             saveToLocal.setNumber(value.user!!.phone_number)
-            val intent = Intent(this, SendOTPActivity::class.java)
-            intent.putExtra(NUMBER, value)
-
-            startActivity(intent)
+//            val intent = Intent(this, SendOTPActivity::class.java)
+            startActivity(Intent(this, DashboardActivity::class.java))
+//            intent.putExtra(NUMBER, value)
+//
+//            startActivity(intent)
         }
     }
 

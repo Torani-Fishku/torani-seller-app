@@ -67,7 +67,8 @@ class EnterNumberActivity : AppCompatActivity() {
         if (startText && numText.length == 13){
             saveToLocal.setNumber(numText)
             val user = User(phone_number = numText)
-            val intent = Intent(this, SendOTPActivity::class.java)
+//            val intent = Intent(this, SendOTPActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             intent.putExtra(NUMBER, OtpArgs(user))
             startActivity(intent)
         }else{
