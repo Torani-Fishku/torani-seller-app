@@ -41,6 +41,20 @@
             android:exported="false"
             android:label="@string/title_activity_address"
             android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_address"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".presentation.ui.analysis.selling.SellingAnalysisActivity"
+            android:exported="false"
+            android:label="@string/title_activity__analysis_selling"
+            android:theme="@style/Theme.FisherSeller" />
+
+        <activity
+            android:name=".presentation.ui.analysis.weather.WeatherAnalysisActivity"
+            android:exported="false"
+            android:label="@string/title_activity__analysis_weather"
+            android:theme="@style/Theme.FisherSeller" />
 
         <service
             android:name=".services.FirebaseService"

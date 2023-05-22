@@ -3,12 +3,19 @@ package id.fishku.fisherseller.presentation.ui.add
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import id.fishku.fisherseller.compose.utils.UiState
 import id.fishku.fishersellercore.core.Resource
 import id.fishku.fisherseller.seller.domain.repository.Repository
 import id.fishku.fishersellercore.requests.AddRequest
 import id.fishku.fishersellercore.response.AddResponse
 import id.fishku.fishersellercore.response.MessageResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
@@ -22,9 +29,25 @@ import javax.inject.Inject
 class AddViewModel @Inject constructor(
     private val repo: Repository
 ) : ViewModel() {
+    private val _response = MutableStateFlow<UiState<MessageResponse>>(UiState.Idle)
+    val response = _response.asStateFlow()
+
     fun postMenu(request: AddRequest): LiveData<Resource<AddResponse>> =
         repo.postMenu(request).asLiveData()
 
     fun editMenu(idFish: String, request: AddRequest): LiveData<Resource<MessageResponse>> = repo.editMenu(idFish, request).asLiveData()
     fun uploadImage(url: String, file: File): LiveData<Resource<MessageResponse>> = repo.uploadImage(url, file).asLiveData()
+
+    fun editMenuCompose(idFish: String, request: AddRequest){
+        _response.value = UiState.Loading
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.editMenu(idFish, request)
+                .catch { _response.value = UiState.Error(it.message.toString()) }
+                .collect { _response.value = UiState.Success(it.message.toString()) }
+        }
+    }
+
+    fun setResponseBackToIdle(){
+        _response.value = UiState.Idle
+    }
 }
