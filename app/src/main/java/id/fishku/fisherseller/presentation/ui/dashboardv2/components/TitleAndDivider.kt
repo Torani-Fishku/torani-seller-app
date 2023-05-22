@@ -15,8 +15,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
+import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2ViewModel
+import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
 
 /**
  * TitleAndDivider Composable Component
@@ -27,6 +30,9 @@ import id.fishku.fisherseller.compose.theme.fonts
  */
 @Composable
 fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
+    val viewModel = hiltViewModel<DashboardV2ViewModel>()
+    val sortedState by viewModel.sorted
+
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             title,
@@ -55,9 +61,19 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
             Box {
                 TextButton(
                     onClick = { expanded = !expanded },
-                    contentPadding = PaddingValues(8.dp)
+                    contentPadding = PaddingValues(
+                        start = 8.dp,
+                        end = 4.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
                 ) {
-                    Text("Urutkan", style = TextStyle(fontFamily = fonts, fontSize = 12.sp))
+                    Text(
+                        if (sortedState == StockSortType.ASC)
+                            "Urutkan dari stok paling sedikit"
+                        else "Urutkan dari stok paling banyak",
+                        style = TextStyle(fontFamily = fonts, fontSize = 12.sp)
+                    )
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
                     Icon(
                         Icons.Filled.ExpandMore,
@@ -81,7 +97,10 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
                                 )
                             )
                         },
-                        onClick = { }
+                        onClick = {
+                            viewModel.changeStockSort(StockSortType.ASC)
+                            expanded = false
+                        }
                     )
                     DropdownMenuItem(
                         text = {
@@ -90,7 +109,10 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
                                 style = TextStyle(fontFamily = fonts)
                             )
                         },
-                        onClick = { }
+                        onClick = {
+                            viewModel.changeStockSort(StockSortType.DESC)
+                            expanded = false
+                        }
                     )
                 }
             }

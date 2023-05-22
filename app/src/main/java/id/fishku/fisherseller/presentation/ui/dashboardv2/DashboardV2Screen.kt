@@ -21,6 +21,9 @@ import id.fishku.fisherseller.presentation.ui.dashboardv2.components.*
 import androidx.compose.ui.text.TextStyle
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.presentation.ui.notification.StockNotifActivity
+import id.fishku.fishersellercore.core.Resource
+import id.fishku.fishersellercore.model.MenuModel
+import id.fishku.fishersellercore.response.GenericResponse
 
 /**
  * DashboardV2 Composable Screen
@@ -29,7 +32,7 @@ import id.fishku.fisherseller.presentation.ui.notification.StockNotifActivity
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardV2Screen() {
+fun DashboardV2Screen(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
     val context = LocalContext.current
 
     Scaffold(topBar = {
@@ -69,7 +72,7 @@ fun DashboardV2Screen() {
             Spacer(modifier = Modifier.height(16.dp))
             SalesAnalysis()
             Spacer(modifier = Modifier.height(16.dp))
-            StockAnalysis()
+            StockAnalysis(fetchFishState)
         }
     })
 }
@@ -79,6 +82,6 @@ fun DashboardV2Screen() {
 @Composable
 fun DashboardV2ScreenPreview() {
     Mdc3Theme {
-        DashboardV2Screen()
+        DashboardV2Screen(null)
     }
 }
