@@ -15,12 +15,14 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import id.fishku.fisherseller.R
+import id.fishku.fisherseller.compose.utils.UiState
 import id.fishku.fisherseller.databinding.FragmentHomeBinding
 import id.fishku.fisherseller.otp.core.Status
 import id.fishku.fisherseller.presentation.ui.add.AddFActivity
 import id.fishku.fisherseller.presentation.ui.detail.FishDetailActivity
 import id.fishku.fisherseller.seller.services.SessionManager
 import id.fishku.fishersellercore.model.MenuModel
+import id.fishku.fishersellercore.response.MessageResponse
 import id.fishku.fishersellercore.util.Constants
 import id.fishku.fishersellercore.util.capitalizeWords
 import id.fishku.fishersellercore.util.hideKeyboard
@@ -99,6 +101,11 @@ class HomeFragment : Fragment() {
         menuAdapter.setOnDelClick {
             showDelDialog(it)
         }
+
+        menuAdapter.setOnSaveEditClick  {
+            saveEditProduct(it)
+        }
+
         binding.edtSearch.addTextChangedListener(afterTextChangedListener)
         binding.edtSearch.setOnEditorActionListener(OnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -167,6 +174,16 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun saveEditProduct(uiState: UiState<MessageResponse>){
+        if (uiState is UiState.Error){
+            binding.root.mySnackBar("Gagal menyimpan perubahan", R.color.green)
+        }else if(uiState is UiState.Success){
+            binding.root.mySnackBar("Sukses menyimpan perubahan", R.color.green)
+            observableViewModel()
+        }
+
     }
 
     private fun loading(isLoading: Boolean){

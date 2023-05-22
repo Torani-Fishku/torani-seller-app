@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.accompanist.themeadapter.material3.Mdc3Theme
+import id.fishku.fisherseller.compose.utils.UiState
 import id.fishku.fisherseller.databinding.ItemMenuBinding
 import id.fishku.fisherseller.presentation.ui.home.component.FishProductItem
 import id.fishku.fishersellercore.model.MenuModel
+import id.fishku.fishersellercore.response.MessageResponse
 
 /**
  * Menu adapter
@@ -34,7 +36,7 @@ class MenuAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = getItem(position)
-        if (currentItem != null) holder.bind(currentItem, listener, listenerDel)
+        if (currentItem != null) holder.bind(currentItem, listener, listenerDel, listenerSaveEdit)
         holder.itemView.setOnClickListener { listenerClick?.invoke(getItem(position)) }
     }
 
@@ -49,18 +51,17 @@ class MenuAdapter(private val context: Context) :
         fun bind(
             data: MenuModel,
             listener: ((MenuModel) -> Unit)?,
-            listenerDel: ((MenuModel) -> Unit)?
+            listenerDel: ((MenuModel) -> Unit)?,
+            listenerSaveEdit: ((uiState: UiState<MessageResponse>) -> Unit)?
         ) {
-
             with(binding) {
-
                 cvItemMenu.setContent {
-
                     Mdc3Theme {
                         FishProductItem(
                             fishProduct = data,
                             funcEdit = listener,
-                            funcDelete = listenerDel
+                            funcDelete = listenerDel,
+                            funcSaveEdit = listenerSaveEdit
                         )
                     }
                 }
@@ -72,9 +73,15 @@ class MenuAdapter(private val context: Context) :
     fun setOnItemClick(listener: (MenuModel) -> Unit) {
         this.listener = listener
     }
+
     private var listenerDel: ((MenuModel) -> Unit)? = null
     fun setOnDelClick(listener: (MenuModel) -> Unit) {
         this.listenerDel = listener
+    }
+
+    private var listenerSaveEdit: ((uiState: UiState<MessageResponse>) -> Unit)? = null
+    fun setOnSaveEditClick(listener: (uiState: UiState<MessageResponse>) -> Unit) {
+        this.listenerSaveEdit = listener
     }
 
     private var listenerClick : ((MenuModel) -> Unit)? = null

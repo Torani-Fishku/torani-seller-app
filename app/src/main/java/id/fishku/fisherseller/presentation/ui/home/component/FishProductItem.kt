@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -24,7 +25,9 @@ import coil.request.ImageRequest
 import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
+import id.fishku.fisherseller.compose.utils.UiState
 import id.fishku.fishersellercore.model.MenuModel
+import id.fishku.fishersellercore.response.MessageResponse
 import id.fishku.fishersellercore.util.convertCurrencyFormat
 import kotlinx.coroutines.launch
 
@@ -33,7 +36,8 @@ import kotlinx.coroutines.launch
 fun FishProductItem(
     fishProduct: MenuModel,
     funcEdit: ((MenuModel) -> Unit)?,
-    funcDelete: ((MenuModel) -> Unit)?
+    funcDelete: ((MenuModel) -> Unit)?,
+    funcSaveEdit: ((uiState: UiState<MessageResponse>)-> Unit)?
 ) {
     val sheetScope = rememberCoroutineScope()
     val moreSheetState = rememberModalBottomSheetState()
@@ -65,7 +69,8 @@ fun FishProductItem(
                         .build(),
                     contentDescription = "Translated description of what the image contains",
                     placeholder = painterResource(R.drawable.img_product_placeholder),
-                    modifier = Modifier.clip(RoundedCornerShape(8.dp)).defaultMinSize(90.dp)
+                    modifier = Modifier.size(140.dp).clip(RoundedCornerShape(8.dp)),
+                    contentScale = ContentScale.FillBounds,
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
@@ -92,7 +97,7 @@ fun FishProductItem(
                     Text(
                         stringResource(
                             R.string.stock_convert,
-                            fishProduct.stock ?: 0,
+                            fishProduct.weight,
                         ),
                         style = TextStyle(
                             fontFamily = fonts,
@@ -166,8 +171,8 @@ fun FishProductItem(
         }
     }
     BottomSheetMore(sheetScope, moreSheetState, fishProduct, funcEdit, funcDelete)
-    BottomSheetChangePrice(sheetScope, changePriceSheetState, fishProduct)
-    BottomSheetChangeStock(sheetScope, changeStockSheetState, fishProduct)
+    BottomSheetChangePrice(sheetScope, changePriceSheetState, fishProduct, funcSaveEdit)
+    BottomSheetChangeStock(sheetScope, changeStockSheetState, fishProduct,funcSaveEdit)
 }
 
 @Preview(showBackground = true)
@@ -179,7 +184,6 @@ fun FishProductItemPreview() {
         name = "Ikan Tuna",
         price = "97000",
         weight = 10,
-        stock = 100,
     )
 
     Mdc3Theme {
@@ -187,6 +191,7 @@ fun FishProductItemPreview() {
             fishProduct = menuModel,
             funcEdit = null,
             funcDelete = null,
+            funcSaveEdit = null
         )
     }
 }

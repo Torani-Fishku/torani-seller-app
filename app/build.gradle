@@ -112,6 +112,7 @@ dependencies {
     androidTestImplementation project(path: ':app')
     androidTestImplementation project(path: ':app')
     kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     // Security
     implementation "androidx.security:security-crypto:1.1.0-alpha04"
@@ -135,6 +136,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-themeadapter-material3:0.31.2-alpha"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
     implementation "io.coil-kt:coil-compose:2.3.0"
+    implementation 'androidx.compose.runtime:runtime-livedata:1.5.0-alpha04'
 
     // Jetpack Compose Graph
     implementation "com.patrykandpatrick.vico:core:1.6.5"
