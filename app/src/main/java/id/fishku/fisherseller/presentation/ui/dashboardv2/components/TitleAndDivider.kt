@@ -31,7 +31,8 @@ import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
 @Composable
 fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
     val viewModel = hiltViewModel<DashboardV2ViewModel>()
-    val sortedState by viewModel.sortedStock
+    val sortedStateStock by viewModel.sortedStock
+    val sortedStatePrice by viewModel.sortedPrice
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
@@ -70,7 +71,7 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
                     )
                 ) {
                     Text(
-                        if (sortedState == StockSortType.ASC)
+                        if (sortedStateStock == StockSortType.ASC)
                             "Urutkan dari stok paling sedikit"
                         else "Urutkan dari stok paling banyak",
                         style = TextStyle(fontFamily = fonts, fontSize = 12.sp)
@@ -134,9 +135,9 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
                     )
                 ) {
                     Text(
-                        if (sortedState == StockSortType.ASC)
-                            "Urutkan dari harga yang paling mahal"
-                        else "Urutkan dari harga yang paling murah",
+                        if (sortedStatePrice == StockSortType.ASC)
+                            "Urutkan dari harga yang paling murah"
+                        else "Urutkan dari harga yang paling mahal",
                         style = TextStyle(fontFamily = fonts, fontSize = 12.sp)
                     )
                     Spacer(Modifier.size(ButtonDefaults.IconSpacing))
