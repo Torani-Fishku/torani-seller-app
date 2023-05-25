@@ -27,13 +27,11 @@ class DashboardV2Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
-            val idSeller = prefs.getUser().id
-            viewModel.getListFish(idSeller!!).observe(viewLifecycleOwner){ res ->
+            val nameSeller = prefs.getUser().name
                 setContent {
                     Mdc3Theme{
-                        DashboardV2Screen(res)
+                        DashboardV2Screen(nameSeller)
                     }
-                }
             }
 
         }

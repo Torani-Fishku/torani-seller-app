@@ -1,4 +1,4 @@
-package id.fishku.fisherseller.presentation.ui.dashboardv2.components
+package id.fishku.fisherseller.presentation.ui.analysis.price.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,23 +20,19 @@ import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.otp.core.Status
 import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2ViewModel
 import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
+import id.fishku.fisherseller.presentation.ui.dashboardv2.components.TitleAndDivider
 import id.fishku.fishersellercore.core.Resource
 import id.fishku.fishersellercore.model.MenuModel
 import id.fishku.fishersellercore.response.GenericResponse
 import kotlin.math.ceil
 
-/**
- * StockAnalysis Composable Component
- *
- * Component to show stock analytics of fish sold by user
- */
 @Composable
-fun StockAnalysis(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
+fun PriceProduct(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
     val viewModel = hiltViewModel<DashboardV2ViewModel>()
-    val sortedState by viewModel.sortedStock
+    val sortedState by viewModel.sortedPrice
 
-    TitleAndDivider("Analisis Stok")
-    Spacer(modifier = Modifier.height(24.dp))
+    TitleAndDivider("Harga Produk")
+    Spacer(modifier = Modifier.height(8.dp))
 
     when (fetchFishState?.status) {
         Status.LOADING -> Column(
@@ -50,9 +46,9 @@ fun StockAnalysis(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
         Status.SUCCESS -> {
             var fishProducts: List<MenuModel> = fetchFishState.data?.data ?: emptyList()
             fishProducts = if (sortedState == StockSortType.ASC){
-                fishProducts.sortedBy { it.weight }
+                fishProducts.sortedBy { it.price }
             }else{
-                fishProducts.sortedByDescending { it.weight }
+                fishProducts.sortedByDescending { it.price }
             }
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
@@ -70,7 +66,7 @@ fun StockAnalysis(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
                             )
                         )
                         Text(
-                            text = fishProducts[it].weight.toString(),
+                            text = "Rp " + fishProducts[it].price.toString(),
                             style = TextStyle(
                                 fontFamily = fonts,
                                 fontSize = 20.sp,

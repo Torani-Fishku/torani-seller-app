@@ -31,7 +31,7 @@ import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
 @Composable
 fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
     val viewModel = hiltViewModel<DashboardV2ViewModel>()
-    val sortedState by viewModel.sorted
+    val sortedState by viewModel.sortedStock
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
@@ -41,7 +41,8 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.blue),
-            )
+            ),
+
         )
         if (onClick != null) {
             Spacer(Modifier.weight(1f))
@@ -54,7 +55,7 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
             }
         }
 
-        if (title == "Analisis Stok") {
+        if (title == "Stok Produk") {
             var expanded by remember { mutableStateOf(false) }
 
             Spacer(Modifier.weight(1f, true))
@@ -111,6 +112,70 @@ fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
                         },
                         onClick = {
                             viewModel.changeStockSort(StockSortType.DESC)
+                            expanded = false
+                        }
+                    )
+                }
+            }
+        }
+
+        if (title == "Harga Produk") {
+            var expanded by remember { mutableStateOf(false) }
+
+//            Spacer(Modifier.weight(1f, true))
+            Box {
+                TextButton(
+                    onClick = { expanded = !expanded },
+                    contentPadding = PaddingValues(
+                        start = 8.dp,
+                        end = 4.dp,
+                        top = 8.dp,
+                        bottom = 8.dp
+                    )
+                ) {
+                    Text(
+                        if (sortedState == StockSortType.ASC)
+                            "Urutkan dari harga yang paling mahal"
+                        else "Urutkan dari harga yang paling murah",
+                        style = TextStyle(fontFamily = fonts, fontSize = 12.sp)
+                    )
+                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+                    Icon(
+                        Icons.Filled.ExpandMore,
+                        contentDescription = "Localized description",
+                        modifier = Modifier.size(ButtonDefaults.IconSize)
+                    )
+                }
+
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                "Urutkan dari harga yang paling murah",
+                                style = TextStyle(
+                                    fontFamily = fonts, platformStyle = PlatformTextStyle(
+                                        includeFontPadding = false
+                                    )
+                                )
+                            )
+                        },
+                        onClick = {
+                            viewModel.changePriceSort(StockSortType.ASC)
+                            expanded = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                "Urutkan dari harga yang paling mahal",
+                                style = TextStyle(fontFamily = fonts)
+                            )
+                        },
+                        onClick = {
+                            viewModel.changePriceSort(StockSortType.DESC)
                             expanded = false
                         }
                     )

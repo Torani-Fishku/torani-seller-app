@@ -187,4 +187,6 @@
     <string name="stock_convert">Stok: %1$s kg</string>
     <string name="title_activity__analysis_weather">WeatherAnalysisActivity</string>
     <string name="title_activity__analysis_selling">SellingnalysisActivity</string>
+    <string name="title_activity__analysis_price">PriceAnalysisActivity</string>
+    <string name="title_activity__analysis_stock">StockAnalysis</string>
 </resources>

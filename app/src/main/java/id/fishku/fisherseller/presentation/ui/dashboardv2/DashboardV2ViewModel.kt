@@ -22,8 +22,11 @@ import javax.inject.Inject
 class DashboardV2ViewModel @Inject constructor(
     private val repo: Repository
 ) : ViewModel() {
-    private val _sorted = mutableStateOf(StockSortType.ASC)
-    val sorted: State<StockSortType> = _sorted
+    private val _sortedStock = mutableStateOf(StockSortType.ASC)
+    val sortedStock: State<StockSortType> = _sortedStock
+
+    private val _sortedPrice = mutableStateOf(StockSortType.ASC)
+    val sortedPrice: State<StockSortType> = _sortedPrice
 
     /**
      * Get list fish
@@ -36,7 +39,11 @@ class DashboardV2ViewModel @Inject constructor(
     }
 
     fun changeStockSort(stockSortType: StockSortType){
-        _sorted.value = stockSortType
+        _sortedStock.value = stockSortType
+    }
+
+    fun changePriceSort(stockSortType: StockSortType){
+        _sortedPrice.value = stockSortType
     }
 
 }

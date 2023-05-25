@@ -1,4 +1,4 @@
-package id.fishku.fisherseller.presentation.ui.dashboardv2.components
+package id.fishku.fisherseller.presentation.ui.analysis.stock.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,6 +20,7 @@ import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.otp.core.Status
 import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2ViewModel
 import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
+import id.fishku.fisherseller.presentation.ui.dashboardv2.components.TitleAndDivider
 import id.fishku.fishersellercore.core.Resource
 import id.fishku.fishersellercore.model.MenuModel
 import id.fishku.fishersellercore.response.GenericResponse
@@ -35,7 +36,7 @@ fun StockAnalysis(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
     val viewModel = hiltViewModel<DashboardV2ViewModel>()
     val sortedState by viewModel.sortedStock
 
-    TitleAndDivider("Analisis Stok")
+    TitleAndDivider("Stok Produk")
     Spacer(modifier = Modifier.height(24.dp))
 
     when (fetchFishState?.status) {
@@ -56,7 +57,7 @@ fun StockAnalysis(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
             }
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
-                modifier = Modifier.height((ceil(fishProducts.size / 3.0) * 60).dp),
+                modifier = Modifier.height((ceil(fishProducts.size / 3.0) * 70).dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 items(fishProducts.size) {
