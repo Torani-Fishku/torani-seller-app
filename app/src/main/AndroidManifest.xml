@@ -51,10 +51,25 @@
             android:theme="@style/Theme.FisherSeller" />
 
         <activity
-            android:name=".presentation.ui.analysis.weather.WeatherAnalysisActivity"
+            android:name=".presentation.ui.analysis.stock.StockAnalysisActivity"
             android:exported="false"
+            android:label="@string/title_activity__analysis_stock"
+            android:theme="@style/Theme.FisherSeller" />
+
+
+        <activity
+            android:name=".presentation.ui.analysis.price.PriceAnalysisActivity"
+            android:exported="false"
+            android:label="@string/title_activity__analysis_price"
+            android:theme="@style/Theme.FisherSeller" />
+
+        <activity
+            android:name=".presentation.ui.analysis.weather.WeatherAnalysisActivity"
+            android:exported="true"
             android:label="@string/title_activity__analysis_weather"
             android:theme="@style/Theme.FisherSeller" />
+
+
 
         <service
             android:name=".services.FirebaseService"

@@ -14,6 +14,7 @@ import android.text.SpannableString
 import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -21,12 +22,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.databinding.ActivityAddBinding
 import id.fishku.fisherseller.otp.core.Status
 import id.fishku.fisherseller.presentation.ui.DashboardActivity
+import id.fishku.fisherseller.presentation.ui.home.HomeFragment
 import id.fishku.fisherseller.seller.services.SessionManager
 import id.fishku.fishersellercore.model.MenuModel
 import id.fishku.fishersellercore.requests.AddRequest
@@ -57,6 +60,8 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
     private var _editMenu: MenuModel? = null
     private val editMenu get() = _editMenu
 
+    private lateinit var fragment : Fragment
+
     @Inject
     lateinit var prefs: SessionManager
 
@@ -86,6 +91,8 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         _binding = ActivityAddBinding.inflate(layoutInflater)
         supportActionBar?.hide()
         setContentView(binding.root)
+        fragment = HomeFragment()
+
 
         val nameProduct = "Nama Barang*"
         val spannableName = SpannableString(nameProduct)
@@ -215,7 +222,10 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 Status.SUCCESS -> {
                     binding.root.mySnackBar(getString(R.string.edit_product), R.color.green)
-                    startActivity(Intent(this, DashboardActivity::class.java))
+//                    startActivity(Intent(this, HomeFragment::class.java))
+                    supportFragmentManager.beginTransaction()
+                        .replace(binding.container.id, fragment)
+                        .commit()
                     finish()
                 }
             }
@@ -233,7 +243,10 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 Status.SUCCESS -> {
                     binding.root.mySnackBar(getString(R.string.add_product), R.color.green)
-                    startActivity(Intent(this, DashboardActivity::class.java))
+//                    startActivity(Intent(this, HomeFragment::class.java))
+                    supportFragmentManager.beginTransaction()
+                        .replace(binding.container.id, fragment)
+                        .commit()
                     finish()
                 }
             }

@@ -1,0 +1,38 @@
+package id.fishku.fisherseller.presentation.ui.analysis.price
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.fragment.app.viewModels
+import com.google.accompanist.themeadapter.material3.Mdc3Theme
+import dagger.hilt.android.AndroidEntryPoint
+import id.fishku.fisherseller.presentation.ui.analysis.selling.SellingAnalysisScreen
+import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2Screen
+import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2ViewModel
+import id.fishku.fisherseller.seller.services.SessionManager
+import javax.inject.Inject
+
+@AndroidEntryPoint
+class PriceAnalysisActivity : ComponentActivity () {
+    @Inject
+    lateinit var prefs: SessionManager
+    private val viewModel: DashboardV2ViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val idSeller = prefs.getUser().id
+        viewModel.getListFish(idSeller!!).observe(this){ res ->
+            setContent {
+                Mdc3Theme{
+                    PriceAnalysisScreen(res)
+                }
+            }
+        }
+    }
+}

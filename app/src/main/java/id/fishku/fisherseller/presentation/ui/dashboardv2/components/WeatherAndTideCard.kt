@@ -21,12 +21,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.presentation.ui.analysis.weather.WeatherAnalysisActivity
+import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +41,9 @@ fun WeatherAndTideCard() {
 
     Box(modifier = Modifier.padding(top = 4.dp, end = 4.dp, start = 4.dp)) {
         Card(
-            modifier = Modifier.height(200.dp).fillMaxWidth(),
+            modifier = Modifier
+                .height(200.dp)
+                .fillMaxWidth(),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primary,
             ),
@@ -63,7 +68,8 @@ fun WeatherAndTideCard() {
                     Box {
                         Row(
                             horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .padding(horizontal = 32.dp, vertical = 16.dp)
                         ) {
                             Box {
@@ -121,7 +127,9 @@ fun WeatherAndTideCard() {
                     contentScale = ContentScale.FillWidth,
                     painter = painterResource(id = R.drawable.img_wave),
                     contentDescription = "My Image",
-                    modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth()
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
                 )
             }
 
@@ -136,7 +144,8 @@ fun WeatherAndTideCard() {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
                             .padding(horizontal = 8.dp)
                     ) {
                         Text(
@@ -207,5 +216,13 @@ fun WeatherAndTideCard() {
             contentDescription = "",
             tint = colorResource(R.color.blue_500),
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DashboardV2ScreenPrevie() {
+    Mdc3Theme {
+       WeatherAndTideCard()
     }
 }
