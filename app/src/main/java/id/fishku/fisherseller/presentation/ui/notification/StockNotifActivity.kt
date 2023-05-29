@@ -76,4 +76,9 @@ class StockNotifActivity : AppCompatActivity() {
             ""
     }
 
+    override fun onResume() {
+        super.onResume()
+        observableViewModel()
+    }
+
 }
