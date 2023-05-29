@@ -88,6 +88,7 @@ class HomeFragment : Fragment() {
 
         menuAdapter.setOnItemClickListener {
             val intent = Intent(requireActivity(), FishDetailActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             intent.putExtra(Constants.SEND_MENU_TO_EDIT, it)
             startActivity(intent)
         }

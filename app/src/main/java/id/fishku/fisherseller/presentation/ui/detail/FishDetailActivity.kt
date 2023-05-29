@@ -47,8 +47,29 @@ class FishDetailActivity : AppCompatActivity() {
 
         binding.btnEdit.setOnClickListener {
             val intent = Intent(this, AddFActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             intent.putExtra(Constants.SEND_MENU_TO_EDIT, detailFish)
             startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val detailFish = if (Build.VERSION.SDK_INT >= 33) {
+            intent.getParcelableExtra(Constants.SEND_MENU_TO_EDIT, MenuModel::class.java)
+        } else {
+            intent.getParcelableExtra(Constants.SEND_MENU_TO_EDIT)
+        }
+
+        binding.nameFishDetail.text = detailFish?.name
+        binding.priceFish.text = "Rp ${detailFish?.price}/kg"
+        binding.stockFish.text = "Tersedia ${detailFish?.weight} kg"
+        binding.tvDescDetail.text = "${detailFish?.name} 100% segar"
+        binding.ivFish.load(Constants.URL_IMAGE + detailFish?.photo_url) {
+            crossfade(true)
+            placeholder(R.drawable.baseline_image_24)
         }
 
     }
