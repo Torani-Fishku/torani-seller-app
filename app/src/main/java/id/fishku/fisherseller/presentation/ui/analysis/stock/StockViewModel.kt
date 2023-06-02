@@ -1,4 +1,4 @@
-package id.fishku.fisherseller.presentation.ui.dashboardv2
+package id.fishku.fisherseller.presentation.ui.analysis.stock
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
 import id.fishku.fisherseller.seller.domain.repository.Repository
 import id.fishku.fishersellercore.core.Resource
 import id.fishku.fishersellercore.model.MenuModel
@@ -19,7 +20,7 @@ import javax.inject.Inject
  * @constructor Create empty Home view model
  */
 @HiltViewModel
-class DashboardV2ViewModel @Inject constructor(
+class StockViewModel @Inject constructor(
     private val repo: Repository
 ) : ViewModel() {
     private val _sortedStock = mutableStateOf(StockSortType.ASC)

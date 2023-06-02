@@ -6,8 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import dagger.hilt.android.AndroidEntryPoint
-import id.fishku.fisherseller.presentation.ui.analysis.price.PriceAnalysisScreen
-import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2ViewModel
 import id.fishku.fisherseller.seller.services.SessionManager
 import javax.inject.Inject
 
@@ -15,7 +13,7 @@ import javax.inject.Inject
 class StockAnalysisActivity : ComponentActivity (){
     @Inject
     lateinit var prefs: SessionManager
-    private val viewModel: DashboardV2ViewModel by viewModels()
+    private val viewModel: StockViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

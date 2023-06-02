@@ -18,9 +18,6 @@ import androidx.compose.ui.unit.sp
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.presentation.ui.DashboardActivity
-import id.fishku.fisherseller.presentation.ui.analysis.price.component.PriceLableCard
-import id.fishku.fisherseller.presentation.ui.analysis.price.component.PriceProduct
-import id.fishku.fisherseller.presentation.ui.analysis.price.component.TrendPredictionPriceChart
 import id.fishku.fisherseller.presentation.ui.analysis.stock.component.StockAnalysis
 import id.fishku.fisherseller.presentation.ui.analysis.stock.component.StockAnalysisOverviewCard
 import id.fishku.fishersellercore.core.Resource
