@@ -189,4 +189,5 @@
     <string name="title_activity__analysis_selling">SellingnalysisActivity</string>
     <string name="title_activity__analysis_price">PriceAnalysisActivity</string>
     <string name="title_activity__analysis_stock">StockAnalysis</string>
+    <string name="by_torani_fishku">by Torani X Fishku</string>
 </resources>
