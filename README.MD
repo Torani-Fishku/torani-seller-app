@@ -11,10 +11,10 @@ Repository Fishku Seller for Torani Android Development Team
  - 👨‍💻 Yauw James Fang Dwiputra Harta
 
 ## 🎨 Prototype
-Will be updated soon!
+Will be published soon!
 
 ## 📱 APK
-Will be updated soon!
+Will be published soon!
 
 ## 💻Tech Stack
 - MVVM (Model-View-ViewModel) Architecture Pattern
