@@ -1,15 +1,22 @@
-# Fishku-Seller
+# 🎣 Fishku-Seller
+> by Torani X Fishku
+Repository Fishku Seller for Torani Android Development Team
 
-Repository Fishku Seller for Android Development Team's
+<a href="http://developer.android.com/index.html"><img alt="Platform" src="https://img.shields.io/badge/platform-Android-green.svg"></a>
+<a href="http://kotlinlang.org"><img alt="Kotlin" src="https://img.shields.io/badge/kotlin-1.7.10-blue.svg"></a>
+<a href="https://developer.android.com/studio/releases/gradle-plugin"><img alt="Gradle" src="https://img.shields.io/badge/gradle-7.4-yellow.svg"></a>
 
-<p align="center">
-  <a href="http://developer.android.com/index.html"><img alt="Platform" src="https://img.shields.io/badge/platform-Android-green.svg"></a>
-  <a href="http://kotlinlang.org"><img alt="Kotlin" src="https://img.shields.io/badge/kotlin-1.7.10-blue.svg"></a>
-  <a href="https://developer.android.com/studio/releases/gradle-plugin"><img alt="Gradle" src="https://img.shields.io/badge/gradle-7.4-yellow.svg"></a>
-</p>
+## 👩‍💻👨‍💻 Mobile Development Team
+ - Sabyna Maharani
+ - Yauw James Fang Dwiputra Harta
 
-## Tech Stack
+## 🎨 Prototype
+Will be updated soon!
 
+## 📱 APK
+Will be updated soon!
+
+## 💻Tech Stack
 - MVVM (Model-View-ViewModel) Architecture Pattern
 - Modularization (core module)
 - Dynamic Feature (favorite module)
@@ -19,5 +26,4 @@ Repository Fishku Seller for Android Development Team's
 - ViewBinding
 - Enkripsi SharedPreference
 - Obfuscation with Proguard
-- Jetpack Compose
-
+- Jetpack Compose with Material3
