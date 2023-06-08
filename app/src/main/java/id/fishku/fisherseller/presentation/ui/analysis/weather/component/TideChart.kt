@@ -22,15 +22,19 @@ import com.patrykandpatrick.vico.compose.axis.vertical.startAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.line.lineChart
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
+import com.patrykandpatrick.vico.core.axis.AxisPosition
+import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.presentation.ui.analysis.style.rememberChartStyle
 import id.fishku.fisherseller.presentation.ui.analysis.style.rememberLegend
 import id.fishku.fisherseller.presentation.ui.analysis.style.rememberMarker
+import id.fishku.fishersellercore.response.WeatherAndTideItem
+import id.fishku.fishersellercore.response.WeatherAndTideResponse
 
 @Composable
-fun TideChartWithTitle() {
+fun TideChartWithTitle(weatherAndTideData: WeatherAndTideResponse) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -59,7 +63,7 @@ fun TideChartWithTitle() {
     }
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
-            "0.01 m ",
+            "${weatherAndTideData.data?.get(0)?.waveDesc}",
             style = TextStyle(
                 fontFamily = fonts,
                 fontSize = 20.sp,
@@ -93,20 +97,46 @@ fun TideChartWithTitle() {
         )
     }
     Spacer(modifier = Modifier.height(8.dp))
-
-    TideChart()
+    InfoCard(weatherAndTideData.data?.get(0)?.warningDesc ?: "-")
+    Spacer(modifier = Modifier.height(8.dp))
+    TideChart(weatherAndTideData.data ?: emptyList())
 }
 
 @Composable
-fun TideChart() {
-    val chartEntryModel = entryModelOf(1 to 4f, 2 to 12f, 3 to 8f, 4 to 16f, 5 to 6f, 6 to 6f, 7 to 8f)
+fun TideChart(items: List<WeatherAndTideItem?>) {
+    val listOfXAxis: ArrayList<String> = arrayListOf()
+    val listOfData: ArrayList<Float> = arrayListOf()
+    for (item in items) {
+        if (item != null) {
+            var waveDesc: String? = item.waveDesc
+            if (waveDesc != null) {
+                waveDesc = waveDesc.replace(" m", "")
+                val splitString = waveDesc.split(" - ")
+                val lowestTide = splitString[0].toFloat()
+                val highestTide = splitString[1].toFloat()
+                listOfData.add((lowestTide + highestTide) / 2)
+            }
+            listOfXAxis.add(item.timeDesc ?: "-")
+        }
+    }
+    val bottomAxisValueFormatter =
+        AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _ -> listOfXAxis[x.toInt() - 1] }
+    val chartEntryModel =
+        entryModelOf(
+            1 to listOfData[0],
+            2 to listOfData[1],
+            3 to listOfData[2],
+            4 to listOfData[3],
+        )
+
+
     val marker = rememberMarker()
     val chartColors = listOf(colorResource(R.color.blue))
     ProvideChartStyle(rememberChartStyle(chartColors)) {
         Chart(
             chart = lineChart(persistentMarkers = remember(marker) { mapOf(10f to marker) }),
             startAxis = startAxis(),
-            bottomAxis = bottomAxis(guideline = null),
+            bottomAxis = bottomAxis(valueFormatter = bottomAxisValueFormatter),
             marker = marker,
             legend = rememberLegend("Tinggi Gelombang dalam meter"),
             model = chartEntryModel

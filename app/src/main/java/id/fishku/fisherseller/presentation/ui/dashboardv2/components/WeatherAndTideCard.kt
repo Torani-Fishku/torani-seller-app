@@ -29,11 +29,11 @@ import com.google.accompanist.themeadapter.material3.Mdc3Theme
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.presentation.ui.analysis.weather.WeatherAnalysisActivity
-import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2Screen
+import id.fishku.fishersellercore.response.WeatherAndTideResponse
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WeatherAndTideCard() {
+fun WeatherAndTideCard(weatherAndTideData: WeatherAndTideResponse) {
     val context = LocalContext.current
     val iconSize = 120.dp
     val offsetHorizontalInPx = LocalDensity.current.run { (iconSize / 7).roundToPx() }
@@ -58,24 +58,28 @@ fun WeatherAndTideCard() {
             ) {
                 Column(modifier = Modifier.padding(8.dp)) {
                     Text(
-                        "12 Mei 2023 21:38",
+                        weatherAndTideData.issued?.replace("UTC", "") ?: "",
                         style = TextStyle(fontFamily = fonts, fontSize = 10.sp)
                     )
                     Text(
-                        "Bangka, Bangka Belitung",
+                        weatherAndTideData.name ?: "",
                         style = TextStyle(fontFamily = fonts, fontSize = 10.sp)
                     )
                     Box {
                         Row(
+                            verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 32.dp, vertical = 16.dp)
+                                .padding(horizontal = 8.dp, vertical = 16.dp)
                         ) {
                             Box {
-                                Column(verticalArrangement = Arrangement.Center) {
+                                Column(
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
                                     Text(
-                                        "-0.03 m",
+                                        "${weatherAndTideData.data?.get(0)?.waveDesc}",
                                         style = TextStyle(
                                             fontFamily = fonts,
                                             fontSize = 24.sp,
@@ -83,23 +87,28 @@ fun WeatherAndTideCard() {
                                             platformStyle = PlatformTextStyle(
                                                 includeFontPadding = false
                                             )
-                                        )
+                                        ),
                                     )
                                     Text(
-                                        "Gelombang Rendah",
+                                        "Gelombang ${weatherAndTideData.data?.get(0)?.waveCat}",
                                         style = TextStyle(
                                             fontFamily = fonts,
                                             fontSize = 12.sp,
                                             fontWeight = FontWeight.Medium,
-                                        )
+                                        ),
                                     )
                                 }
                             }
                             Spacer(modifier = Modifier.width(8.dp))
                             Box {
-                                Column(verticalArrangement = Arrangement.Center) {
+                                Column(verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally,) {
                                     Text(
-                                        "26°C",
+                                        "${weatherAndTideData.data?.get(0)?.windSpeedMin} - ${
+                                            weatherAndTideData.data?.get(
+                                                0
+                                            )?.windSpeedMax
+                                        } km/h",
                                         style = TextStyle(
                                             fontFamily = fonts,
                                             fontSize = 24.sp,
@@ -110,7 +119,7 @@ fun WeatherAndTideCard() {
                                         )
                                     )
                                     Text(
-                                        "Berawan",
+                                        "${weatherAndTideData.data?.get(0)?.weather}",
                                         style = TextStyle(
                                             fontFamily = fonts,
                                             fontSize = 12.sp,
@@ -126,7 +135,7 @@ fun WeatherAndTideCard() {
                 Image(
                     contentScale = ContentScale.FillWidth,
                     painter = painterResource(id = R.drawable.img_wave),
-                    contentDescription = "My Image",
+                    contentDescription = "Cloud Image",
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth()
@@ -201,7 +210,6 @@ fun WeatherAndTideCard() {
                         }
                     }
 
-
                 }
             }
         }
@@ -221,8 +229,8 @@ fun WeatherAndTideCard() {
 
 @Preview(showBackground = true)
 @Composable
-fun DashboardV2ScreenPrevie() {
+fun DashboardV2ScreenPreview() {
     Mdc3Theme {
-       WeatherAndTideCard()
+        WeatherAndTideCard(WeatherAndTideResponse())
     }
 }

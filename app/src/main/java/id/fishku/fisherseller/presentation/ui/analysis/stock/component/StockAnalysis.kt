@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.otp.core.Status
-import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2ViewModel
+import id.fishku.fisherseller.presentation.ui.analysis.stock.StockViewModel
 import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
 import id.fishku.fisherseller.presentation.ui.dashboardv2.components.TitleAndDivider
 import id.fishku.fishersellercore.core.Resource
@@ -33,7 +33,7 @@ import kotlin.math.ceil
  */
 @Composable
 fun StockAnalysis(fetchFishState: Resource<GenericResponse<MenuModel>>?) {
-    val viewModel = hiltViewModel<DashboardV2ViewModel>()
+    val viewModel = hiltViewModel<StockViewModel>()
     val sortedState by viewModel.sortedStock
 
     TitleAndDivider("Stok Produk")

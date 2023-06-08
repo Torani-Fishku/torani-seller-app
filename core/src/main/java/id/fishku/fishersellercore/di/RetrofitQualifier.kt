@@ -17,6 +17,30 @@ class RetrofitQualifier {
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
+    annotation class RetrofitWeather
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class HttpWeather
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class ParserWeather
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class RetrofitPrice
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class HttpPrice
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class ParserPrice
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
     annotation class RetrofitSeller
 
     @Qualifier

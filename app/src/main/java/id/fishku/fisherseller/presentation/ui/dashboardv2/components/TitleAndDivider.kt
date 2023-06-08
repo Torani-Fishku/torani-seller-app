@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
-import id.fishku.fisherseller.presentation.ui.dashboardv2.DashboardV2ViewModel
+import id.fishku.fisherseller.presentation.ui.analysis.stock.StockViewModel
 import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
 
 /**
@@ -30,7 +30,7 @@ import id.fishku.fisherseller.presentation.ui.dashboardv2.StockSortType
  */
 @Composable
 fun TitleAndDivider(title: String, onClick: (() -> Unit)? = null) {
-    val viewModel = hiltViewModel<DashboardV2ViewModel>()
+    val viewModel = hiltViewModel<StockViewModel>()
     val sortedStateStock by viewModel.sortedStock
     val sortedStatePrice by viewModel.sortedPrice
 

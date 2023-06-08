@@ -22,22 +22,26 @@ import com.patrykandpatrick.vico.compose.axis.vertical.startAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.line.lineChart
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
+import com.patrykandpatrick.vico.core.axis.AxisPosition
+import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
 import id.fishku.fisherseller.presentation.ui.analysis.style.rememberChartStyle
 import id.fishku.fisherseller.presentation.ui.analysis.style.rememberLegend
 import id.fishku.fisherseller.presentation.ui.analysis.style.rememberMarker
+import id.fishku.fishersellercore.response.WeatherAndTideItem
+import id.fishku.fishersellercore.response.WeatherAndTideResponse
 
 @Composable
-fun WeatherChartWithTitle() {
+fun WindChartWithTitle(weatherAndTideData: WeatherAndTideResponse) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            "Cuaca",
+            "Kecepatan Angin",
             style = TextStyle(
                 fontFamily = fonts,
                 fontSize = 12.sp,
@@ -59,7 +63,11 @@ fun WeatherChartWithTitle() {
     }
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
-            "25°C ",
+            "${weatherAndTideData.data?.get(0)?.windSpeedMin} - ${
+                weatherAndTideData.data?.get(
+                    0
+                )?.windSpeedMax
+            } km/h",
             style = TextStyle(
                 fontFamily = fonts,
                 fontSize = 20.sp,
@@ -93,22 +101,41 @@ fun WeatherChartWithTitle() {
         )
     }
     Spacer(modifier = Modifier.height(8.dp))
-
-    WeatherChart()
+    InfoCard(weatherAndTideData.data?.get(0)?.weatherDesc ?: "-")
+    Spacer(modifier = Modifier.height(8.dp))
+    WindChart(weatherAndTideData.data ?: emptyList())
 }
 
 @Composable
-fun WeatherChart() {
-    val chartEntryModel = entryModelOf(1 to 4f, 2 to 12f, 3 to 8f, 4 to 16f, 5 to 6f, 6 to 6f, 7 to 8f)
+fun WindChart(items: List<WeatherAndTideItem?>) {
+    val listOfXAxis: ArrayList<String> = arrayListOf()
+    val listOfData: ArrayList<Float> = arrayListOf()
+    for (item in items) {
+        if (item != null) {
+            val windSpeedMin: Float = item.windSpeedMin?.toFloat() ?: 0f
+            val windSpeedMax: Float = item.windSpeedMax?.toFloat() ?: 0f
+            listOfData.add((windSpeedMin + windSpeedMax) / 2)
+            listOfXAxis.add(item.timeDesc ?: "-")
+        }
+    }
+    val bottomAxisValueFormatter =
+        AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _ -> listOfXAxis[x.toInt() - 1] }
+    val chartEntryModel =
+        entryModelOf(
+            1 to listOfData[0],
+            2 to listOfData[1],
+            3 to listOfData[2],
+            4 to listOfData[3],
+        )
     val marker = rememberMarker()
     val chartColors = listOf(colorResource(R.color.blue))
     ProvideChartStyle(rememberChartStyle(chartColors)) {
         Chart(
             chart = lineChart(persistentMarkers = remember(marker) { mapOf(10f to marker) }),
             startAxis = startAxis(),
-            bottomAxis = bottomAxis(guideline = null),
+            bottomAxis = bottomAxis(valueFormatter = bottomAxisValueFormatter),
             marker = marker,
-            legend = rememberLegend("Temperatur Cuaca dalam °C"),
+            legend = rememberLegend("Kecepatan Angin dalam km/h"),
             model = chartEntryModel
         )
     }

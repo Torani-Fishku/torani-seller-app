@@ -1,8 +1,6 @@
 package id.fishku.fisherseller.presentation.ui.dashboardv2
 
 import android.content.Intent
-import android.widget.ImageButton
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -33,17 +30,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.compose.theme.fonts
-import id.fishku.fisherseller.compose.utils.UiState
+import id.fishku.fisherseller.otp.core.Status
 import id.fishku.fisherseller.presentation.ui.analysis.price.PriceAnalysisActivity
 import id.fishku.fisherseller.presentation.ui.analysis.selling.SellingAnalysisActivity
 import id.fishku.fisherseller.presentation.ui.analysis.stock.StockAnalysisActivity
-import id.fishku.fisherseller.presentation.ui.detail.FishDetailActivity
 import id.fishku.fisherseller.presentation.ui.notification.StockNotifActivity
 import id.fishku.fishersellercore.core.Resource
-import id.fishku.fishersellercore.model.MenuModel
-import id.fishku.fishersellercore.response.GenericResponse
-import id.fishku.fishersellercore.response.MessageResponse
-import id.fishku.fishersellercore.util.Constants
+import id.fishku.fishersellercore.response.WeatherAndTideResponse
 
 /**
  * DashboardV2 Composable Screen
@@ -52,7 +45,7 @@ import id.fishku.fishersellercore.util.Constants
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardV2Screen(userName : String?) {
+fun DashboardV2Screen(userName: String?, weatherAndTiderRes: Resource<WeatherAndTideResponse>?) {
     val context = LocalContext.current
 
     Scaffold(topBar = {
@@ -144,7 +137,22 @@ fun DashboardV2Screen(userName : String?) {
             Spacer(modifier = Modifier.height(24.dp))
             TitleAndDivider(title = "Analisis dan Prediksi")
             Spacer(modifier = Modifier.height(24.dp))
-            WeatherAndTideCard()
+            when (weatherAndTiderRes?.status) {
+                Status.LOADING -> Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
+                }
+                Status.ERROR -> Text("Error :(( ${weatherAndTiderRes.message}")
+                Status.SUCCESS -> {
+                    weatherAndTiderRes.data?.let {
+                        WeatherAndTideCard(weatherAndTideData = it)
+                    }
+                }
+                else -> Box{}
+            }
             Spacer(modifier = Modifier.height(24.dp))
             Row(
                 modifier = Modifier
@@ -201,11 +209,6 @@ fun DashboardV2Screen(userName : String?) {
                 }
             }
             ProductData()
-//            Spacer(modifier = Modifier.height(16.dp))
-//            SalesAnalysis()
-//            Spacer(modifier = Modifier.height(16.dp))
-//            StockAnalysis(fetchFishState)
-//        }
         }
     })
 }
@@ -215,6 +218,6 @@ fun DashboardV2Screen(userName : String?) {
 @Composable
 fun DashboardV2ScreenPreview() {
     Mdc3Theme {
-        DashboardV2Screen(null)
+        DashboardV2Screen(null, null)
     }
 }
