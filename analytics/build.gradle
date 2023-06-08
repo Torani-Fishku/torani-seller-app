@@ -25,11 +25,13 @@ android {
         debug {
             minifyEnabled false
             buildConfigField ("String", "BASE_URL_WEATHER_SEA_TIDES", properties["BASE_URL_WEATHER_SEA_TIDES"])
+            buildConfigField ("String", "BASE_URL_PRICE_PREDICTION", properties["BASE_URL_PRICE_PREDICTION"])
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField ("String", "BASE_URL_WEATHER_SEA_TIDES", properties["BASE_URL_WEATHER_SEA_TIDES"])
+            buildConfigField ("String", "BASE_URL_PRICE_PREDICTION", properties["BASE_URL_PRICE_PREDICTION"])
         }
     }
     compileOptions {

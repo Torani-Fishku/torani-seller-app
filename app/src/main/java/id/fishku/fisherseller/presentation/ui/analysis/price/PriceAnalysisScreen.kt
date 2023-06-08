@@ -21,17 +21,17 @@ import id.fishku.fisherseller.presentation.ui.DashboardActivity
 import id.fishku.fisherseller.presentation.ui.analysis.price.component.PriceLableCard
 import id.fishku.fisherseller.presentation.ui.analysis.price.component.PriceProduct
 import id.fishku.fisherseller.presentation.ui.analysis.price.component.TrendPredictionPriceChart
-import id.fishku.fisherseller.presentation.ui.analysis.selling.component.IncomeChartWithTitle
-import id.fishku.fisherseller.presentation.ui.analysis.selling.component.ProductSoldChartWithTitle
-import id.fishku.fisherseller.presentation.ui.analysis.selling.component.SellingOverviewCard
-import id.fishku.fisherseller.presentation.ui.dashboardv2.components.TitleAndDivider
 import id.fishku.fishersellercore.core.Resource
 import id.fishku.fishersellercore.model.MenuModel
+import id.fishku.fishersellercore.response.FishPriceResponse
 import id.fishku.fishersellercore.response.GenericResponse
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PriceAnalysisScreen (fetchFishState: Resource<GenericResponse<MenuModel>>?) {
+fun PriceAnalysisScreen(
+    fetchFishState: Resource<GenericResponse<MenuModel>>?,
+    fishPricePredict: ArrayList<Resource<FishPriceResponse>>?,
+) {
     val context = LocalContext.current
     Column(modifier = Modifier.padding(16.dp)) {
         CenterAlignedTopAppBar(
@@ -69,9 +69,9 @@ fun PriceAnalysisScreen (fetchFishState: Resource<GenericResponse<MenuModel>>?) 
         PriceLableCard()
         Spacer(modifier = Modifier.height(32.dp))
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-            TrendPredictionPriceChart()
+            TrendPredictionPriceChart(fishPricePredict)
             Spacer(modifier = Modifier.height(48.dp))
-            PriceProduct(fetchFishState = fetchFishState )
+            PriceProduct(fetchFishState = fetchFishState)
         }
     }
 }

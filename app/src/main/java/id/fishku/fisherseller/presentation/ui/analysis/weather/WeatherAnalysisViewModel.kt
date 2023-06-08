@@ -24,7 +24,6 @@ class WeatherAnalysisViewModel @Inject constructor(
             repository.getWeatherAndTideInfo(request).collect{
                 _weatherRes.value = it
             }
-
         }
     }
 }

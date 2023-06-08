@@ -111,6 +111,30 @@ class SafeCall {
             }
         }
 
+    suspend fun <String,R> enqueueFishPrice(
+        fishType: String,
+        date: String,
+        call: suspend (String, String) -> Response<R>
+    ): Resource<R> =
+        try {
+            val res = call(fishType, date)
+            val body = res.body()
+            val errorBody = res.errorBody()
+            if (res.isSuccessful && body != null){
+                Resource.success(body)
+            }else if (errorBody != null){
+                Resource.error(errorBody.toString())
+            }else{
+                Resource.error(UNKNOWN_ERROR, null)
+            }
+        }catch (e: Exception){
+            Timber.tag("safe").e(e.toString())
+            when(e){
+                is SocketTimeoutException -> Resource.error(TIMEOUT_ERROR, null)
+                else -> Resource.error(UNKNOWN_ERROR, null)
+            }
+        }
+
     suspend fun <T, U, R> enqueue(
         req1: T,
         req2: U,

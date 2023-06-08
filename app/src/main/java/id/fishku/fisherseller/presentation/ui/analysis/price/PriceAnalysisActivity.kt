@@ -15,15 +15,19 @@ class PriceAnalysisActivity : ComponentActivity () {
     @Inject
     lateinit var prefs: SessionManager
     private val viewModel: StockViewModel by viewModels()
+    private val priceViewModel: FishPriceViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val idSeller = prefs.getUser().id
+        priceViewModel.getAllFishPrice()
         viewModel.getListFish(idSeller!!).observe(this){ res ->
-            setContent {
-                Mdc3Theme{
-                    PriceAnalysisScreen(res)
+            priceViewModel.listFishPrice.observe(this){ priceResponse ->
+                setContent {
+                    Mdc3Theme{
+                        PriceAnalysisScreen(res, priceResponse)
+                    }
                 }
             }
         }
