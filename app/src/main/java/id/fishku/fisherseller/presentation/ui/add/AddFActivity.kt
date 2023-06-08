@@ -9,8 +9,12 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -18,12 +22,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import id.fishku.fisherseller.R
 import id.fishku.fisherseller.databinding.ActivityAddBinding
 import id.fishku.fisherseller.otp.core.Status
 import id.fishku.fisherseller.presentation.ui.DashboardActivity
+import id.fishku.fisherseller.presentation.ui.home.HomeFragment
 import id.fishku.fisherseller.seller.services.SessionManager
 import id.fishku.fishersellercore.model.MenuModel
 import id.fishku.fishersellercore.requests.AddRequest
@@ -54,6 +60,8 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
     private var _editMenu: MenuModel? = null
     private val editMenu get() = _editMenu
 
+    private lateinit var fragment : Fragment
+
     @Inject
     lateinit var prefs: SessionManager
 
@@ -83,6 +91,57 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         _binding = ActivityAddBinding.inflate(layoutInflater)
         supportActionBar?.hide()
         setContentView(binding.root)
+        fragment = HomeFragment()
+
+
+        val nameProduct = "Nama Barang*"
+        val spannableName = SpannableString(nameProduct)
+        spannableName.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)),
+            0,
+            10,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableName.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)),
+            11,
+            12,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        binding.textView2.text = spannableName
+
+        val price = "Harga*"
+        val spannablePrice = SpannableString(price)
+        spannablePrice.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)),
+            0,
+            4,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannablePrice.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)),
+            5,
+            6,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        binding.textView3.text = spannablePrice
+
+        val stock = "Stok (Kg)*"
+        val spannableStock = SpannableString(stock)
+        spannableStock.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.blue)),
+            0,
+            8,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        spannableStock.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(this, R.color.red_error)),
+            9,
+            10,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        binding.textView4.text = spannableStock
+
 
         if (!allPermissionGranted()) {
             ActivityCompat.requestPermissions(
@@ -108,14 +167,14 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             intent.getParcelableExtra(Constants.SEND_MENU_TO_EDIT)
         }
-        if (editMenu != null){
+        if (editMenu != null) {
             binding.tvHeader.text = resources.getString(R.string.edit_menu)
             binding.tvEdit.visibility = View.GONE
         }
         binding.edtName.setText(editMenu?.name ?: "")
         binding.edtPrice.setText(editMenu?.price ?: "")
         binding.edtStock.setText(editMenu?.weight?.toString() ?: "")
-        editMenu?.photo_url?.let { binding.itemImg.setImage(Constants.URL_IMAGE+it) }
+        editMenu?.photo_url?.let { binding.itemImg.setImage(Constants.URL_IMAGE + it) }
     }
 
     private fun sendRequest() {
@@ -129,15 +188,19 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         if (editMenu?.id_fish != null)
             observableEditViewModel(editMenu!!.id_fish, request)
         else {
-            observableViewModel(request)
+            if (myFile != null) {
+                observableViewModel(request)
+            } else {
+                binding.ivEmpty.visibility = View.VISIBLE
+            }
         }
     }
 
-    private fun uploadImage(){
+    private fun uploadImage() {
 
         if (myFile != null) {
             observableUploadViewModel(myFile!!)
-        } else{
+        } else {
             sendRequest()
             binding.ivEmpty.visibility = View.VISIBLE
         }
@@ -159,7 +222,10 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 Status.SUCCESS -> {
                     binding.root.mySnackBar(getString(R.string.edit_product), R.color.green)
-                    startActivity(Intent(this, DashboardActivity::class.java))
+//                    startActivity(Intent(this, HomeFragment::class.java))
+                    supportFragmentManager.beginTransaction()
+                        .replace(binding.container.id, fragment)
+                        .commit()
                     finish()
                 }
             }
@@ -177,7 +243,10 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 Status.SUCCESS -> {
                     binding.root.mySnackBar(getString(R.string.add_product), R.color.green)
-                    startActivity(Intent(this, DashboardActivity::class.java))
+//                    startActivity(Intent(this, HomeFragment::class.java))
+                    supportFragmentManager.beginTransaction()
+                        .replace(binding.container.id, fragment)
+                        .commit()
                     finish()
                 }
             }
@@ -252,7 +321,7 @@ class AddFActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.btn_back -> {
                 val intent = Intent(this, DashboardActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(intent)
                 finish()
             }

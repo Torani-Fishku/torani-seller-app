@@ -20,6 +20,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -39,14 +42,25 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+    }
+
     namespace 'id.fishku.fisherseller'
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
     implementation project(":core")
     implementation project(":otp")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0"
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
@@ -62,6 +76,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation project(path: ':analytics')
 
     //Jetpack Navigation Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -84,6 +99,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'id.zelory:compressor:3.0.1'
+    implementation "io.coil-kt:coil:1.1.1"
 
     implementation 'com.github.bumptech.glide:glide:4.14.1'
     kapt 'com.github.bumptech.glide:compiler:4.14.1'
@@ -97,6 +113,7 @@ dependencies {
     androidTestImplementation project(path: ':app')
     androidTestImplementation project(path: ':app')
     kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     // Security
     implementation "androidx.security:security-crypto:1.1.0-alpha04"
@@ -108,5 +125,24 @@ dependencies {
     // Google Maps
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // Jetpack Compose
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.activity:activity-compose:1.7.1'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.compose.material3:material3:1.2.0-alpha01'
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+    implementation "com.google.accompanist:accompanist-themeadapter-material3:0.31.2-alpha"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "io.coil-kt:coil-compose:2.3.0"
+    implementation 'androidx.compose.runtime:runtime-livedata:1.5.0-alpha04'
+
+    // Jetpack Compose Graph
+    implementation "com.patrykandpatrick.vico:core:1.6.5"
+    implementation "com.patrykandpatrick.vico:compose:1.6.5"
+    implementation "com.patrykandpatrick.vico:views:1.6.5"
+    implementation "com.patrykandpatrick.vico:compose-m3:1.6.5"
 
 }

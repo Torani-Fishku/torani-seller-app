@@ -4,6 +4,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_order">Pesanan</string>
     <string name="title_account">Akun</string>
+    <string name="title_product">Produk</string>
     <string name="logo">Logo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="back">Back</string>
@@ -27,6 +28,7 @@
     <string name="menu">Menu</string>
     <string name="name">Nama Produk</string>
     <string name="price">Harga</string>
+    <string name="stok">Stok</string>
     <string name="title">Title</string>
     <string name="create_menu">Buat daftar menu</string>
     <string name="edit_menu">Edit daftar menu</string>
@@ -50,6 +52,8 @@
     <string name="sub_order">Subtotal Pengiriman</string>
     <string name="total">Total</string>
     <string name="edit">Edit barang</string>
+    <string name="ubah_harga">UBAH HARGA</string>
+    <string name="ubah_stok">UBAH STOK</string>
     <string name="date">Date</string>
     <string name="deliver_status">Status Pengiriman</string>
     <string name="delivered">Pengiriman Selesai</string>
@@ -80,7 +84,7 @@
     <string name="sure_logout_sub">Anda akan logout dari akun ini</string>
 
     <string name="img_empty">Foto tidak boleh kosong</string>
-    <string name="load_image">Memuat Foto...</string>
+    <string name="load_image">Memuat Foto…</string>
     <string name="no_sell">Tidak ada jualan</string>
     <string name="kirim_pesan">Kirim pesan</string>
     <string name="pesan">Pesan</string>
@@ -176,5 +180,14 @@
     <string name="title_activity_address">AddressActivity</string>
     <string name="delivery_location">Lokasi pengiriman</string>
     <string name="tpi_address">Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah</string>
+    <string name="backbutton">back</string>
+    <string name="notification">NOTIFICATION</string>
+    <string name="no_notifikasi">Tidak ada notifikasi</string>
 
+    <string name="stock_convert">Stok: %1$s kg</string>
+    <string name="title_activity__analysis_weather">WeatherAnalysisActivity</string>
+    <string name="title_activity__analysis_selling">SellingnalysisActivity</string>
+    <string name="title_activity__analysis_price">PriceAnalysisActivity</string>
+    <string name="title_activity__analysis_stock">StockAnalysis</string>
+    <string name="by_torani_fishku">by Torani X Fishku</string>
 </resources>

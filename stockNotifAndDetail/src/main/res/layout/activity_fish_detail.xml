@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".FishDetailActivity"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"/>
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@android:color/transparent"
+                android:contentDescription="@string/backbutton"
+                android:minHeight="60dp"
+                android:src="@drawable/ic_action_back"
+
+                app:circularflow_defaultRadius="10dp" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/name_fish_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Ikan Tuna"
+                android:maxLines="2"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="50dp"
+                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/stock_fish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tersedia 5 kg"
+                android:layout_toEndOf="@+id/name_fish_detail"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/yellow_background"
+                android:drawablePadding="4dp"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/price_fish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Rp 97000/kg"
+                android:textSize="25sp"
+                android:textColor="@color/blue"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tv_desc_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ikan Tuna 100% Segar"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="8dp"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/kakap1"/>
+
+            <TextView
+                android:id="@+id/seller_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muslikin"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_locTpi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TPI Jepara"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jl. Sidik Harun, Ujungbatu III, Ujungbatu, Kec. Jepara, Kabupaten Jepara, Jawa Tengah"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            />
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:text="Edit Barang"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="50dp"
+            android:layout_margin="8dp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_bg"/>
+
+    </LinearLayout>
+</ScrollView>
