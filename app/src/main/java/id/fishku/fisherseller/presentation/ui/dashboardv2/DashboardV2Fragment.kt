@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -36,7 +40,12 @@ class DashboardV2Fragment : Fragment() {
             weatherViewModel.weatherResponse.observe(viewLifecycleOwner) { res ->
                 setContent {
                     Mdc3Theme {
-                        DashboardV2Screen(nameSeller, res)
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = Color.White
+                        ) {
+                            DashboardV2Screen(nameSeller, res)
+                        }
                     }
                 }
             }

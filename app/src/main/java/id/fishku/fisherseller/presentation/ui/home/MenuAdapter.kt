@@ -3,7 +3,11 @@ package id.fishku.fisherseller.presentation.ui.home
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -57,12 +61,17 @@ class MenuAdapter(private val context: Context) :
             with(binding) {
                 cvItemMenu.setContent {
                     Mdc3Theme {
-                        FishProductItem(
-                            fishProduct = data,
-                            funcEdit = listener,
-                            funcDelete = listenerDel,
-                            funcSaveEdit = listenerSaveEdit
-                        )
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = Color.White
+                        ) {
+                            FishProductItem(
+                                fishProduct = data,
+                                funcEdit = listener,
+                                funcDelete = listenerDel,
+                                funcSaveEdit = listenerSaveEdit
+                            )
+                        }
                     }
                 }
             }
@@ -84,8 +93,8 @@ class MenuAdapter(private val context: Context) :
         this.listenerSaveEdit = listener
     }
 
-    private var listenerClick : ((MenuModel) -> Unit)? = null
-    fun setOnItemClickListener(listener: (MenuModel) -> Unit){
+    private var listenerClick: ((MenuModel) -> Unit)? = null
+    fun setOnItemClickListener(listener: (MenuModel) -> Unit) {
         this.listenerClick = listener
     }
 }

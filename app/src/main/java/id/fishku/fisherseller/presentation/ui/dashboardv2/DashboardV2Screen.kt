@@ -48,169 +48,176 @@ import id.fishku.fishersellercore.response.WeatherAndTideResponse
 fun DashboardV2Screen(userName: String?, weatherAndTiderRes: Resource<WeatherAndTideResponse>?) {
     val context = LocalContext.current
 
-    Scaffold(topBar = {
-        CenterAlignedTopAppBar(title = {
-            Text(
-                "DASHBOARD",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    fontFamily = fonts,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 24.sp,
+    Scaffold(
+        containerColor = Color.White,
+        topBar = {
+            CenterAlignedTopAppBar(
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.White,
+                ),
+                title = {
+                Text(
+                    "DASHBOARD",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = TextStyle(
+                        fontFamily = fonts,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontSize = 24.sp,
+                    )
                 )
-            )
-        }, actions = {
-            IconButton(onClick = {
-                val intent = Intent(context, StockNotifActivity::class.java)
-                context.startActivity(intent)
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.Notifications,
-                    contentDescription = "Notification",
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(28.dp)
+            }, actions = {
+                IconButton(onClick = {
+                    val intent = Intent(context, StockNotifActivity::class.java)
+                    context.startActivity(intent)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.Notifications,
+                        contentDescription = "Notification",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+            })
+        }, content = { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(innerPadding)
+                    .padding(24.dp)
+            ) {
+                Text(
+                    buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                color = colorResource(R.color.blue),
+                                fontFamily = fonts,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        ) {
+                            append("Hai, ")
+                        }
+                        withStyle(
+                            style = SpanStyle(
+                                color = colorResource(R.color.blue),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp,
+                            )
+                        ) {
+                            append("$userName ")
+                        }
+                    },
+                    textAlign = TextAlign.Left,
+                    style = TextStyle(
+                        fontFamily = fonts,
+                        fontSize = 16.sp,
+                    )
                 )
+                Text(
+                    buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                color = colorResource(R.color.blue),
+                                fontFamily = fonts,
+                                fontWeight = FontWeight.Medium
+                            )
+                        ) {
+                            append("Ayo cek info terbaru bersama ")
+                        }
+                        withStyle(
+                            style = SpanStyle(
+                                color = colorResource(R.color.blue),
+                                fontWeight = FontWeight.Bold,
+                            )
+                        ) {
+                            append("Fishku! ")
+                        }
+                    },
+                    textAlign = TextAlign.Left,
+                    style = TextStyle(
+                        fontFamily = fonts,
+                        fontSize = 16.sp,
+                    )
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                TitleAndDivider(title = "Analisis dan Prediksi")
+                Spacer(modifier = Modifier.height(24.dp))
+                when (weatherAndTiderRes?.status) {
+                    Status.LOADING -> Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                    Status.ERROR -> Text("Error :(( ${weatherAndTiderRes.message}")
+                    Status.SUCCESS -> {
+                        weatherAndTiderRes.data?.let {
+                            WeatherAndTideCard(weatherAndTideData = it)
+                        }
+                    }
+                    else -> Box {}
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Button(
+                        onClick = {
+                            val intent = Intent(context, StockAnalysisActivity::class.java)
+                            context.startActivity(intent)
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                        contentPadding = PaddingValues(4.dp)
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Image(
+                                painter = painterResource(R.drawable.ic_stock),
+                                contentDescription = null,
+                                modifier = Modifier.size(100.dp)
+                            )
+                        }
+                    }
+
+                    Button(
+                        onClick = {
+                            val intent = Intent(context, PriceAnalysisActivity::class.java)
+                            context.startActivity(intent)
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                        contentPadding = PaddingValues(4.dp)
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Image(
+                                painter = painterResource(R.drawable.ic_harga_ikan),
+                                contentDescription = null,
+                                modifier = Modifier.size(100.dp)
+                            )
+                        }
+                    }
+
+                    Button(
+                        onClick = {
+                            val intent = Intent(context, SellingAnalysisActivity::class.java)
+                            context.startActivity(intent)
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                        contentPadding = PaddingValues(4.dp)
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Image(
+                                painter = painterResource(R.drawable.ic_penjualan),
+                                contentDescription = null,
+                                modifier = Modifier.size(100.dp)
+                            )
+                        }
+                    }
+                }
+                ProductData()
             }
         })
-    }, content = { innerPadding ->
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding)
-                .padding(24.dp)
-        ) {
-            Text(
-                buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            color = colorResource(R.color.blue),
-                            fontFamily = fonts,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    ) {
-                        append("Hai, ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = colorResource(R.color.blue),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp,
-                        )
-                    ) {
-                        append("$userName ")
-                    }
-                },
-                textAlign = TextAlign.Left,
-                style = TextStyle(
-                    fontFamily = fonts,
-                    fontSize = 16.sp,
-                )
-            )
-            Text(
-                buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            color = colorResource(R.color.blue),
-                            fontFamily = fonts,
-                            fontWeight = FontWeight.Medium
-                        )
-                    ) {
-                        append("Ayo cek info terbaru bersama ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = colorResource(R.color.blue),
-                            fontWeight = FontWeight.Bold,
-                        )
-                    ) {
-                        append("Fishku! ")
-                    }
-                },
-                textAlign = TextAlign.Left,
-                style = TextStyle(
-                    fontFamily = fonts,
-                    fontSize = 16.sp,
-                )
-            )
-            Spacer(modifier = Modifier.height(24.dp))
-            TitleAndDivider(title = "Analisis dan Prediksi")
-            Spacer(modifier = Modifier.height(24.dp))
-            when (weatherAndTiderRes?.status) {
-                Status.LOADING -> Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    CircularProgressIndicator()
-                }
-                Status.ERROR -> Text("Error :(( ${weatherAndTiderRes.message}")
-                Status.SUCCESS -> {
-                    weatherAndTiderRes.data?.let {
-                        WeatherAndTideCard(weatherAndTideData = it)
-                    }
-                }
-                else -> Box{}
-            }
-            Spacer(modifier = Modifier.height(24.dp))
-            Row(
-                modifier = Modifier
-            ) {
-                Button(
-                    onClick = {
-                        val intent = Intent(context, StockAnalysisActivity::class.java)
-                        context.startActivity(intent)
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                    contentPadding = PaddingValues(8.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_stock),
-                            contentDescription = null,
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                }
-
-                Button(
-                    onClick = {
-                        val intent = Intent(context, PriceAnalysisActivity::class.java)
-                        context.startActivity(intent)
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                    contentPadding = PaddingValues(8.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_harga_ikan),
-                            contentDescription = null,
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                }
-
-                Button(
-                    onClick = {
-                        val intent = Intent(context, SellingAnalysisActivity::class.java)
-                        context.startActivity(intent)
-                    },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-                    contentPadding = PaddingValues(8.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_penjualan),
-                            contentDescription = null,
-                            modifier = Modifier.size(100.dp)
-                        )
-                    }
-                }
-            }
-            ProductData()
-        }
-    })
 }
 
 
